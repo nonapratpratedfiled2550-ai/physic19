@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ธรรมชาติและพฤติกรรมทางฟิสิกส์ · ม.4</title>
+<style>
+  :root {
+    --bg: #07090f;
+    --ink: #e8eef8;
+    --muted: #93a0b5;
+    --card: #121722;
+    --card-2: #1a2130;
+    --line: #2a3344;
+    --teal: #2ee6c8;
+    --teal-d: #14b8a6;
+    --amber: #ffb020;
+    --rose: #ff5d7a;
+    --navy: #f4f7fb;
+    --good: #3ddc97;
+    --shadow: 0 16px 40px rgba(0, 0, 0, .35);
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { color-scheme: dark; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Leelawadee UI", "Segoe UI", Tahoma, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(900px 420px at 0% -10%, rgba(46, 230, 200, .16), transparent 55%),
+      radial-gradient(800px 420px at 100% 0%, rgba(139, 124, 255, .18), transparent 50%),
+      var(--bg);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    padding: 16px 22px;
+    color: white;
+    background: linear-gradient(120deg, #05070c, #101820 55%, #0c2e2a);
+    border-bottom: 1px solid rgba(46, 230, 200, .35);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .35);
+  }
+  header h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: 0; }
+  header p { margin: 4px 0 0; color: #b7c3d6; font-size: 14px; }
+  .mark {
+    width: 52px; height: 52px; border-radius: 16px;
+    display: grid; place-items: center;
+    background: linear-gradient(160deg, rgba(46, 230, 200, .25), rgba(139, 124, 255, .2));
+    border: 1px solid rgba(46, 230, 200, .45);
+    color: #d9fff6;
+    font-size: 28px; font-weight: 700;
+    box-shadow: 0 0 24px rgba(46, 230, 200, .25);
+  }
+  .brand { display: flex; gap: 14px; align-items: center; }
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(270px, 320px) minmax(0, 1fr) minmax(290px, 360px);
+    gap: 14px;
+    padding: 14px;
+    align-items: start;
+  }
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+  }
+  .controls, .analytics {
+    padding: 14px;
+    max-height: calc(100vh - 118px);
+    overflow: auto;
+  }
+  .stage { padding: 12px; }
+  h2 { margin: 0 0 8px; font-size: 18px; }
+  h3 { margin: 0 0 8px; font-size: 15px; color: var(--navy); }
+  .muted { color: var(--muted); font-size: 13.5px; }
+  .mode-select, select, input[type="text"], input[type="number"], textarea {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    background: #0d121b;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 10px;
+  }
+  .mode-select { font-weight: 700; background: #10211f; border-color: #1f6f66; }
+  textarea { min-height: 72px; resize: vertical; }
+  label.field { display: block; margin: 10px 0; font-size: 14px; }
+  label.field span { display: block; margin-bottom: 4px; color: var(--navy); font-weight: 700; }
+  input[type="range"] { width: 100%; accent-color: var(--teal); }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .row > * { flex: 1; }
+  button, .seg button {
+    font: inherit;
+    border: 1px solid var(--line);
+    background: #1a2130;
+    color: var(--ink);
+    border-radius: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+  button:hover { border-color: #3ee0c5; }
+  button.active, .seg button.active {
+    background: var(--teal);
+    color: #041311;
+    border-color: #8fffea;
+    font-weight: 700;
+  }
+  button.primary { background: var(--teal); color: #041311; border-color: #8fffea; font-weight: 700; }
+  button.ghost { background: #121722; }
+  .seg { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 10px; }
+  .seg button { flex: 1; min-width: 88px; }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 10px 12px;
+    margin: 0 0 10px;
+    background: var(--card-2);
+  }
+  .hero { text-align: center; padding: 6px 0 2px; }
+  .hero-v { font-size: 34px; font-weight: 700; color: var(--navy); letter-spacing: 0; line-height: 1.15; }
+  .hero-u { color: var(--teal-d); font-weight: 700; }
+  .hero-s { color: var(--muted); font-size: 13px; }
+  .kv { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; border-bottom: 1px dashed var(--line); font-size: 14.5px; }
+  .kv b { font-weight: 700; text-align: right; }
+  ol.steps { margin: 0; padding-left: 20px; font-size: 15px; }
+  ol.steps li { margin: 6px 0; }
+  .plain { margin: 8px 0 0; color: #d5deea; font-size: 14.5px; }
+  .mis {
+    border-left: 5px solid var(--amber);
+    background: #241c10;
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin-top: 8px;
+  }
+  .mis strong { color: #ffd089; }
+  #stageBar {
+    background: #10211f;
+    border: 1px solid #1f6f66;
+    color: #d7fff6;
+    border-radius: 12px;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    font-size: 14.5px;
+  }
+  #view, #target { width: 100%; display: block; border-radius: 12px; background: #0c1016; }
+  #view { touch-action: none; cursor: crosshair; }
+  #dock { margin-top: 10px; }
+  .base-grid, .ex-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+  .chip {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px;
+    background: #0d121b;
+  }
+  .chip b { display: block; color: #f4f7fb; }
+  .ok { color: var(--good); font-weight: 700; }
+  .bad { color: var(--rose); font-weight: 700; }
+  .hint { color: var(--muted); font-weight: 600; }
+  .bar { height: 8px; background: #243044; border-radius: 99px; overflow: hidden; margin-top: 6px; }
+  .bar > span { display: block; height: 100%; background: var(--teal); }
+  .dM { color: #c4b5fd; } .dL { color: #7dd3fc; } .dT { color: #fdba74; } .dI { color: #6ee7b7; }
+  .pill { display: inline-block; border-radius: 999px; padding: 1px 8px; color: white; font-size: 12px; margin: 0 3px 3px 0; }
+  .pM { background: #7c3aed; } .pL { background: #0284c7; } .pT { background: #d97706; } .pI { background: #059669; } .p1 { background: #64748b; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #314158; border-radius: 99px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  footer { text-align: center; color: var(--muted); font-size: 12.5px; padding: 4px 16px 18px; }
+  #err { color: var(--rose); font-weight: 700; padding: 0 16px; min-height: 0; }
+  button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 3px solid var(--teal); outline-offset: 2px;
+  }
+  @media (max-width: 1100px) {
+    .layout { grid-template-columns: 1fr; }
+    .controls, .analytics { max-height: none; }
+    header { flex-direction: column; align-items: flex-start; }
+    header h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div id="err"></div>
+<header>
+  <div class="brand">
+    <div class="mark">Φ</div>
+    <div>
+      <h1>ธรรมชาติและพฤติกรรมทางฟิสิกส์</h1>
+      <p>บทที่ 1 · ฟิสิกส์ ม.4 · ลากรูปก่อน แล้วค่อยอ่านเหตุผล ไม่ต้องจำทุกอย่างในครั้งเดียว</p>
+    </div>
+  </div>
+</header>
+<main class="layout">
+  <aside id="controls" class="panel controls"></aside>
+  <section class="panel stage">
+    <div id="stageBar"></div>
+    <canvas id="view" width="800" height="480" aria-label="พื้นที่จำลองเชิงโต้ตอบ"></canvas>
+    <div id="dock"></div>
+  </section>
+  <aside id="analytics" class="panel analytics"></aside>
+</main>
+<footer>บทที่ 1 ฟิสิกส์เพิ่มเติม ม.4 · แม่น = ใกล้ของจริง · เที่ยง = วัดซ้ำแล้วได้ค่าใกล้กัน</footer>
+<script>
+window.onerror = function (m) {
+  var d = document.getElementById("err");
+  if (d) d.textContent = "เกิดข้อผิดพลาด: " + m;
+};
+</script>
+<script id="app">
+"use strict";
+
+const PREFIXES = [
+  { id: "p", name: "พิโค", symbol: "p", exp: -12 },
+  { id: "n", name: "นาโน", symbol: "n", exp: -9 },
+  { id: "u", name: "ไมโคร", symbol: "μ", exp: -6 },
+  { id: "m", name: "มิลลิ", symbol: "m", exp: -3 },
+  { id: "c", name: "เซนติ", symbol: "c", exp: -2 },
+  { id: "base", name: "หน่วยฐาน", symbol: "", exp: 0 },
+  { id: "k", name: "กิโล", symbol: "k", exp: 3 },
+  { id: "M", name: "เมกะ", symbol: "M", exp: 6 },
+  { id: "G", name: "จิกะ", symbol: "G", exp: 9 },
+  { id: "T", name: "เทระ", symbol: "T", exp: 12 },
+  { id: "kmh", name: "กิโลเมตรต่อชั่วโมง", symbol: "km/h", exp: null }
+];
+
+const BASES = [
+  ["ความยาว", "เมตร", "m"],
+  ["มวล", "กิโลกรัม", "kg"],
+  ["เวลา", "วินาที", "s"],
+  ["กระแสไฟฟ้า", "แอมแปร์", "A"],
+  ["อุณหภูมิอุณหพลศาสตร์", "เคลวิน", "K"],
+  ["ปริมาณของสาร", "โมล", "mol"],
+  ["ความเข้มของการส่องสว่าง", "แคนเดลา", "cd"]
+];
+
+const EQUATIONS = [
+  { id: "s1", title: "s = ut + ½at²", ok: true, lhsName: "s", lhs: [0, 1, 0, 0], terms: [
+    { name: "ut", dim: [0, 1, 0, 0], how: "[u][t] = (LT⁻¹)(T) = L" },
+    { name: "½at²", dim: [0, 1, 0, 0], how: "[a][t]² = (LT⁻²)(T²) = L  (½ ไม่มีมิติ)" }
+  ]},
+  { id: "v2", title: "v² = u² + 2as", ok: true, lhsName: "v²", lhs: [0, 2, -2, 0], terms: [
+    { name: "u²", dim: [0, 2, -2, 0], how: "(LT⁻¹)² = L²T⁻²" },
+    { name: "2as", dim: [0, 2, -2, 0], how: "(LT⁻²)(L) = L²T⁻²" }
+  ]},
+  { id: "pend", title: "T = 2π√(l/g)", ok: true, lhsName: "T", lhs: [0, 0, 1, 0], terms: [
+    { name: "√(l/g)", dim: [0, 0, 1, 0], how: "l/g = L/(LT⁻²) = T² ถอดรากได้ T (2π ไม่มีมิติ)" }
+  ]},
+  { id: "vat", title: "v = u + at", ok: true, lhsName: "v", lhs: [0, 1, -1, 0], terms: [
+    { name: "u", dim: [0, 1, -1, 0], how: "LT⁻¹" },
+    { name: "at", dim: [0, 1, -1, 0], how: "(LT⁻²)(T) = LT⁻¹" }
+  ]},
+  { id: "newton", title: "F = ma", ok: true, lhsName: "F", lhs: [1, 1, -2, 0], terms: [
+    { name: "ma", dim: [1, 1, -2, 0], how: "(M)(LT⁻²) = MLT⁻²" }
+  ]},
+  { id: "work", title: "W = Fs", ok: true, lhsName: "W", lhs: [1, 2, -2, 0], terms: [
+    { name: "Fs", dim: [1, 2, -2, 0], how: "(MLT⁻²)(L) = ML²T⁻²" }
+  ]},
+  { id: "ek", title: "Eₖ = ½mv²", ok: true, lhsName: "Eₖ", lhs: [1, 2, -2, 0], terms: [
+    { name: "½mv²", dim: [1, 2, -2, 0], how: "M(LT⁻¹)² = ML²T⁻²" }
+  ]},
+  { id: "press", title: "P = F/A", ok: true, lhsName: "P", lhs: [1, -1, -2, 0], terms: [
+    { name: "F/A", dim: [1, -1, -2, 0], how: "(MLT⁻²)/L² = ML⁻¹T⁻²" }
+  ]},
+  { id: "bad1", title: "v = u + at²", ok: false, lhsName: "v", lhs: [0, 1, -1, 0], terms: [
+    { name: "u", dim: [0, 1, -1, 0], how: "LT⁻¹" },
+    { name: "at²", dim: [0, 1, 0, 0], how: "(LT⁻²)(T²) = L ซึ่งไม่เท่ากับ LT⁻¹" }
+  ]},
+  { id: "bad2", title: "T = 2π√(g/l)", ok: false, lhsName: "T", lhs: [0, 0, 1, 0], terms: [
+    { name: "√(g/l)", dim: [0, 0, -1, 0], how: "g/l = T⁻² รากที่สองเป็น T⁻¹ ไม่ใช่ T" }
+  ]},
+  { id: "bad3", title: "s = ut² + ½at²", ok: false, lhsName: "s", lhs: [0, 1, 0, 0], terms: [
+    { name: "ut²", dim: [0, 1, 1, 0], how: "(LT⁻¹)(T²) = LT ไม่เท่ากับ L" },
+    { name: "½at²", dim: [0, 1, 0, 0], how: "L" }
+  ]}
+];
+
+const FINDERS = [
+  { id: "G", title: "กฎแรงโน้มถ่วง หา [G]", rel: "sub", result: [1, 1, -2, 0], known: [2, -2, 0, 0], story: "F = G m₁m₂/r² จึงได้ [G] = [F] − [m₁m₂/r²]" },
+  { id: "k", title: "กฎของฮุก หา [k]", rel: "sub", result: [1, 1, -2, 0], known: [0, 1, 0, 0], story: "F = kx จึงได้ [k] = [F] − [x]" },
+  { id: "rho", title: "ความหนาแน่น ρ = m/V", rel: "sub", result: [1, 0, 0, 0], known: [0, 3, 0, 0], story: "[ρ] = [m] − [V]" },
+  { id: "custom", title: "กำหนดเลขชี้กำลังเอง", rel: "sub", result: [1, 1, -2, 0], known: [0, 1, 0, 0], story: "จัดรูปให้ [X] = [ผลลัพธ์] − [ส่วนที่ทราบ] หรือบวก แล้วแต่รูปแบบ" }
+];
+
+const OBJECTIVES = {
+  instrument: "ลากวัตถุบนรูป แล้วอ่านขีดที่ตรงกัน คำตอบจะอยู่ด้านขวาในรูป 24.3 ± 0.1",
+  units: "เลือกหน่วยต้นทางกับหน่วยที่อยากได้ โปรแกรมช่วยคูณกำลังสิบให้ดู",
+  sigfig: "สีเขียวคือหลักที่นับ สีส้มคือยังไม่แน่ ลองกดตัวเลขตัวอย่างใต้รูป",
+  uncertainty: "บวกลบให้นำ ± มาบวกกัน คูณหารให้ทำเป็นเศษส่วนก่อน แล้วค่อยบวก",
+  dimension: "บวกกันได้เฉพาะหน่วยชนิดเดียวกัน ดูว่าทุกพจน์เป็นหน่วยเดียวกับข้างซ้ายหรือไม่"
+};
+
+const state = {
+  mode: "instrument",
+  tool: "vernier",
+  vernierLC: 0.1,
+  lengthH: 2430,
+  shape: "cylinder",
+  magnifier: true,
+  showSteps: true,
+  hideReading: false,
+  useZero: false,
+  zeroH: 0,
+  rulerFromZero: true,
+  rulerOffsetH: 1800,
+  reveal: 99,
+  quantity: "length",
+  fromPrefix: "k",
+  toPrefix: "m",
+  unitValue: "2.5",
+  sigA: "1500",
+  sigB: "2.50",
+  sigOp: "mul",
+  Atext: "2.50",
+  dAtext: "0.01",
+  Btext: "1.20",
+  dBtext: "0.01",
+  powerN: 2,
+  uncOp: "mul",
+  trialsText: "25.02, 24.98, 25.06, 24.94, 25.00, 25.04, 24.96, 25.02",
+  trialCount: 8,
+  trueMm: 25,
+  useTrue: true,
+  showSd: false,
+  equationId: "s1",
+  dimView: "preset",
+  lhsM: 0, lhsL: 1, lhsT: 0, lhsI: 0,
+  t1M: 0, t1L: 1, t1T: 0, t1I: 0,
+  t2on: true,
+  t2M: 0, t2L: 1, t2T: 0, t2I: 0,
+  findId: "G",
+  rel: "sub",
+  fRM: 1, fRL: 1, fRT: -2, fRI: 0,
+  fKM: 2, fKL: -2, fKT: 0, fKI: 0,
+  targetScenario: "both",
+  studentAnswer: "",
+  feedback: "ลากรูปได้เลย คำตอบโชว์ด้านขวา",
+  more: false,
+  feedbackKind: "hint",
+  feedbackOk: false,
+  view: { w: 800, h: 480, dpr: 1 },
+  layout: null,
+  dragging: false,
+  _lockScroll: null,
+  _drag: null,
+  _inLens: false
+};
+
+function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function sup(n) {
+  const map = { "-": "⁻", "+": "⁺", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+  return String(n).split("").map((c) => map[c] || c).join("");
+}
+function floorLog10(a) {
+  const p = Math.log10(Math.abs(a));
+  const r = Math.round(p);
+  if (Math.abs(p - r) < 1e-9) return r;
+  return Math.floor(p);
+}
+function prefixById(id) { return PREFIXES.find((p) => p.id === id) || PREFIXES[5]; }
+function replaceSup(s) {
+  const map = { "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9", "⁻": "-", "⁺": "+" };
+  return s.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]/g, (ch) => map[ch]);
+}
+
+function roundOneSig(unc) {
+  if (!isFinite(unc) || unc === 0) return 0;
+  const sign = unc < 0 ? -1 : 1;
+  const a = Math.abs(unc);
+  const p = floorLog10(a);
+  const pow = Math.pow(10, p);
+  let y = Math.round(a / pow);
+  let e = p;
+  if (y === 10) { y = 1; e += 1; }
+  if (y === 0) return 0;
+  return sign * y * Math.pow(10, e);
+}
+
+function presentMeasurement(value, unc) {
+  if (!isFinite(value) || !isFinite(unc)) return { text: "—", value: value, unc: unc };
+  const u = roundOneSig(Math.abs(unc));
+  if (u === 0) return { text: String(value) + " ± 0", value: value, unc: 0 };
+  const e = floorLog10(u);
+  const factor = Math.pow(10, e);
+  if (e < 0) {
+    const d = -e;
+    const vs = (Math.round(value / factor) * factor).toFixed(d);
+    const us = (Math.round(u / factor) * factor).toFixed(d);
+    return { text: vs + " ± " + us, value: Number(vs), unc: Number(us) };
+  }
+  const vq = Math.round(value / factor) * factor;
+  const uq = Math.round(u / factor) * factor;
+  return { text: String(vq) + " ± " + String(uq), value: vq, unc: uq };
+}
+
+function roundToSig(num, sig) {
+  if (!isFinite(num)) return "—";
+  if (num === 0) return "0";
+  sig = Math.max(1, sig | 0);
+  const sign = num < 0 ? "-" : "";
+  const abs = Math.abs(num);
+  let e = floorLog10(abs);
+  let m = abs / Math.pow(10, e);
+  m = Number(m.toFixed(sig - 1));
+  if (m >= 10) { m = m / 10; e += 1; }
+  const digitsAfter = sig - e - 1;
+  const plain = m * Math.pow(10, e);
+  const roundedInt = Math.round(plain);
+  const useSci = e >= sig || e < -3 || digitsAfter < 0 || (digitsAfter === 0 && Math.abs(roundedInt) >= 10 && roundedInt % 10 === 0);
+  if (useSci) return sign + m.toFixed(sig - 1) + "×10" + sup(e);
+  if (digitsAfter > 0) return sign + plain.toFixed(digitsAfter);
+  return sign + String(roundedInt);
+}
+
+function formatAtPlace(num, placeExp) {
+  const factor = Math.pow(10, placeExp);
+  const rounded = Math.round(num / factor) * factor;
+  if (placeExp < 0) return { text: rounded.toFixed(-placeExp), value: Number(rounded.toFixed(-placeExp)) };
+  if (placeExp === 0) return { text: String(Math.round(num)), value: Math.round(num) };
+  const exp = rounded === 0 ? 0 : floorLog10(rounded);
+  const sig = Math.max(1, exp - placeExp + 1);
+  return { text: roundToSig(rounded, sig), value: rounded };
+}
+
+function placeName(exp) {
+  const names = { 3: "หลักพัน", 2: "หลักร้อย", 1: "หลักสิบ", 0: "หลักหน่วย" };
+  if (names[exp]) return names[exp];
+  if (exp < 0) return "ทศนิยม " + (-exp) + " ตำแหน่ง";
+  return "หลัก 10" + sup(exp);
+}
+
+function analyzeBody(body, expShift, sci) {
+  const hasDot = body.includes(".");
+  const parts = hasDot ? body.split(".") : [body, null];
+  const intPart = parts[0] === "" ? "0" : parts[0];
+  const frac = parts[1];
+  const glyphs = [];
+  for (let i = 0; i < intPart.length; i++) glyphs.push({ ch: intPart[i], place: intPart.length - 1 - i + expShift });
+  if (frac !== null) glyphs.push({ ch: ".", place: null, dot: true });
+  if (frac !== null) {
+    for (let i = 0; i < frac.length; i++) glyphs.push({ ch: frac[i], place: -1 - i + expShift });
+  }
+  const ids = [];
+  glyphs.forEach((g, i) => { if (!g.dot) ids.push(i); });
+  let firstNZ = -1;
+  let lastNZ = -1;
+  ids.forEach((i) => {
+    if (glyphs[i].ch !== "0") {
+      if (firstNZ < 0) firstNZ = i;
+      lastNZ = i;
+    }
+  });
+  const allZero = firstNZ < 0;
+  const ambigTrail = !sci && frac === null && !allZero;
+  let sigMin = 0;
+  let sigMax = 0;
+  let placeMin = 0;
+  let placeMax = 0;
+  ids.forEach((i) => {
+    const g = glyphs[i];
+    if (allZero) {
+      g.role = i === ids[ids.length - 1] ? "sig" : "leading";
+      return;
+    }
+    if (i < firstNZ) { g.role = "leading"; return; }
+    if (ambigTrail && i > lastNZ) {
+      g.role = "ambig";
+      sigMax += 1;
+      placeMax = g.place;
+      return;
+    }
+    g.role = "sig";
+    sigMin += 1;
+    sigMax += 1;
+    placeMin = g.place;
+    placeMax = g.place;
+  });
+  if (allZero) {
+    sigMin = 1;
+    sigMax = 1;
+    placeMin = glyphs[ids[ids.length - 1]].place;
+    placeMax = placeMin;
+  }
+  return { glyphs: glyphs, sigMin: sigMin, sigMax: sigMax, ambiguous: sigMin !== sigMax, placeMin: placeMin, placeMax: placeMax, allZero: allZero, hasDot: frac !== null };
+}
+
+function analyzeSig(raw) {
+  const original = String(raw == null ? "" : raw).trim();
+  if (!original) return { ok: false, error: "ยังไม่ได้กรอกจำนวน" };
+  let s = original.replace(/\s+/g, "");
+  s = s.replace(/×10([⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+)/g, (_, sups) => "e" + replaceSup(sups));
+  s = s.replace(/[×xX*]10\^([+-]?\d+)/g, "e$1");
+  s = s.replace(/[×xX*]10([+-]?\d+)/g, "e$1");
+  const m = s.match(/^([+-]?)(\d+\.\d*|\.\d+|\d+)(?:e([+-]?\d+))?$/i);
+  if (!m) return { ok: false, error: "รูปแบบจำนวนไม่ถูกต้อง ลองเช่น 1500.0 หรือ 1.50×10^3" };
+  const sign = m[1];
+  const body = m[2];
+  const sci = m[3] !== undefined;
+  const exp = sci ? Number(m[3]) : 0;
+  if (!isFinite(exp)) return { ok: false, error: "เลขชี้กำลังไม่ถูกต้อง" };
+  const parsed = analyzeBody(body, exp, sci);
+  const value = (sign === "-" ? -1 : 1) * Number(body) * Math.pow(10, exp);
+  if (!isFinite(value)) return { ok: false, error: "จำนวนใหญ่หรือเล็กเกินไป" };
+  return Object.assign({ ok: true, raw: original, sign: sign, body: body, exp: exp, sci: sci, value: value }, parsed);
+}
+
+function computeSig(aRaw, bRaw, op) {
+  const A = analyzeSig(aRaw);
+  const B = analyzeSig(bRaw);
+  if (!A.ok) return { ok: false, error: "จำนวนแรก: " + A.error };
+  if (!B.ok) return { ok: false, error: "จำนวนที่สอง: " + B.error };
+  if (op === "div" && B.value === 0) return { ok: false, error: "หารด้วยศูนย์ไม่ได้" };
+  let val = 0;
+  if (op === "add") val = A.value + B.value;
+  else if (op === "sub") val = A.value - B.value;
+  else if (op === "mul") val = A.value * B.value;
+  else val = A.value / B.value;
+  if (op === "add" || op === "sub") {
+    const p = Math.max(A.placeMin, B.placeMin);
+    const shown = formatAtPlace(val, p);
+    return { ok: true, op: op, A: A, B: B, value: val, place: p, text: shown.text, ambiguous: A.ambiguous || B.ambiguous };
+  }
+  const s = Math.min(A.sigMin, B.sigMin);
+  return {
+    ok: true, op: op, A: A, B: B, value: val, sig: s,
+    text: roundToSig(val, s),
+    ambiguous: A.ambiguous || B.ambiguous,
+    sigLoose: Math.min(A.sigMax, B.sigMax)
+  };
+}
+
+function propagate(op, A, dA, B, dB, n) {
+  dA = Math.abs(Number(dA));
+  dB = Math.abs(Number(dB));
+  A = Number(A);
+  B = Number(B);
+  n = Number(n);
+  if (![A, dA, B, dB, n].every(isFinite)) return { ok: false, error: "กรอกตัวเลขให้ครบ" };
+  if (dA === 0 && dB === 0 && op !== "pow") return { ok: false, error: "ใส่ความไม่แน่นอนอย่างน้อยหนึ่งค่า" };
+  let Z = 0;
+  let dZ = 0;
+  let rel = 0;
+  if (op === "add") { Z = A + B; dZ = dA + dB; rel = Z === 0 ? Infinity : dZ / Math.abs(Z); }
+  else if (op === "sub") { Z = A - B; dZ = dA + dB; rel = Z === 0 ? Infinity : dZ / Math.abs(Z); }
+  else if (op === "mul") {
+    if (A === 0 || B === 0) return { ok: false, error: "มีตัวประกอบเป็นศูนย์ ความไม่แน่นอนสัมพัทธ์ในแบบเรียนนี้จึงนิยามไม่ได้" };
+    Z = A * B;
+    rel = dA / Math.abs(A) + dB / Math.abs(B);
+    dZ = Math.abs(Z) * rel;
+  } else if (op === "div") {
+    if (B === 0) return { ok: false, error: "หารด้วยศูนย์ไม่ได้" };
+    if (A === 0) return { ok: false, error: "ตัวตั้งเป็นศูนย์" };
+    Z = A / B;
+    rel = dA / Math.abs(A) + dB / Math.abs(B);
+    dZ = Math.abs(Z) * rel;
+  } else {
+    if (A < 0) return { ok: false, error: "ในแบบฝึกนี้ให้ฐานของการยกกำลังเป็นจำนวนไม่ติดลบ" };
+    if (A === 0 && n <= 0) return { ok: false, error: "ศูนย์ยกกำลังที่ไม่เป็นบวกไม่ได้" };
+    Z = Math.pow(A, n);
+    if (!isFinite(Z)) return { ok: false, error: "ผลลัพธ์ไม่เหมาะจะใช้ในแบบเรียนนี้" };
+    if (A === 0) { rel = 0; dZ = 0; }
+    else {
+      rel = Math.abs(n) * (dA / Math.abs(A));
+      dZ = Math.abs(Z) * rel;
+    }
+  }
+  const presented = presentMeasurement(Z, dZ);
+  return { ok: true, Z: Z, dZ: dZ, rel: rel, percent: rel * 100, presented: presented, op: op };
+}
+
+function summarizeTrials(values) {
+  if (!values.length) return null;
+  const n = values.length;
+  const sum = values.reduce((a, b) => a + b, 0);
+  const mean = sum / n;
+  const max = Math.max.apply(null, values);
+  const min = Math.min.apply(null, values);
+  const half = (max - min) / 2;
+  let sd = 0;
+  if (n > 1) {
+    const ss = values.reduce((s, v) => s + (v - mean) * (v - mean), 0);
+    sd = Math.sqrt(ss / (n - 1));
+  }
+  return { n: n, sum: sum, mean: mean, max: max, min: min, half: half, sd: sd };
+}
+
+function vernierParts(scaleH, lcH) {
+  const stepsPerMm = Math.round(100 / lcH);
+  const steps = Math.round(scaleH / lcH);
+  const observedH = steps * lcH;
+  const mm = Math.floor(steps / stepsPerMm);
+  const n = steps - mm * stepsPerMm;
+  return { mm: mm, n: n, observedH: observedH, stepsPerMm: stepsPerMm };
+}
+
+function microParts(scaleH) {
+  const q = Math.round(scaleH);
+  const base = Math.floor(q / 50) * 50;
+  const div = q - base;
+  return { baseH: base, div: div, observedH: base + div };
+}
+
+function formatHundredths(h) {
+  const neg = h < 0;
+  const a = Math.abs(Math.round(h));
+  return (neg ? "-" : "") + Math.floor(a / 100) + "." + String(a % 100).padStart(2, "0");
+}
+function formatTenthsMm(h) {
+  const tenths = Math.round(h / 10);
+  const neg = tenths < 0;
+  const a = Math.abs(tenths);
+  return (neg ? "-" : "") + Math.floor(a / 10) + "." + String(a % 10);
+}
+
+function measure(cfg) {
+  const tool = cfg.tool;
+  const useZero = !!cfg.useZero && tool !== "ruler";
+  const zeroH = useZero ? Math.round(cfg.zeroH) : 0;
+  const lengthH = Math.round(cfg.lengthH);
+  const scaleH = lengthH + zeroH;
+  if (tool === "ruler") {
+    const fromZero = cfg.rulerFromZero !== false;
+    const leftH = fromZero ? 0 : Math.round(cfg.rulerOffsetH);
+    const rightH = leftH + lengthH;
+    const leftR = fromZero ? 0 : Math.round(leftH / 100) * 100;
+    const rightR = Math.round(rightH / 100) * 100;
+    const observedH = rightR - leftR;
+    const uncH = fromZero ? 50 : 100;
+    const mm = observedH / 100;
+    const uncMm = uncH / 100;
+    const cm = (mm / 10).toFixed(2);
+    const uncCm = (uncMm / 10).toFixed(2);
+    return {
+      tool: tool, scaleH: rightH, leftH: leftH, rightH: rightH, leftR: leftR, rightR: rightR,
+      observedH: observedH, correctedH: observedH, uncH: uncH, zeroH: 0,
+      lcMm: 1, uncMm: uncMm, observedText: formatHundredths(observedH),
+      record: "(" + cm + " ± " + uncCm + ") cm",
+      mmRecord: "(" + formatHundredths(observedH) + " ± " + formatHundredths(uncH) + ") mm",
+      fromZero: fromZero, trueMm: lengthH / 100
+    };
+  }
+  if (tool === "vernier") {
+    const lcH = Math.abs(cfg.vernierLC - 0.02) < 1e-6 ? 2 : 10;
+    const parts = vernierParts(scaleH, lcH);
+    const correctedH = parts.observedH - zeroH;
+    const obsText = lcH >= 10 ? formatTenthsMm(parts.observedH) : formatHundredths(parts.observedH);
+    const corText = lcH >= 10 ? formatTenthsMm(correctedH) : formatHundredths(correctedH);
+    const uncText = lcH >= 10 ? formatTenthsMm(lcH) : formatHundredths(lcH);
+    return {
+      tool: tool, scaleH: scaleH, parts: parts, zeroH: zeroH, lcH: lcH,
+      observedH: parts.observedH, correctedH: correctedH, uncH: lcH,
+      lcMm: lcH / 100, uncMm: lcH / 100,
+      observedText: obsText, correctedText: corText, uncText: uncText,
+      record: "(" + corText + " ± " + uncText + ") mm",
+      trueMm: lengthH / 100, n: parts.n, mainMm: parts.mm
+    };
+  }
+  const parts = microParts(scaleH);
+  const correctedH = parts.observedH - zeroH;
+  return {
+    tool: "micro", scaleH: scaleH, parts: parts, zeroH: zeroH, lcH: 1,
+    observedH: parts.observedH, correctedH: correctedH, uncH: 1,
+    lcMm: 0.01, uncMm: 0.01,
+    observedText: formatHundredths(parts.observedH),
+    correctedText: formatHundredths(correctedH),
+    uncText: "0.01",
+    record: "(" + formatHundredths(correctedH) + " ± 0.01) mm",
+    trueMm: lengthH / 100, n: parts.div, mainMm: parts.baseH / 100
+  };
+}
+
+function dimEq(a, b) { return a.length === b.length && a.every((v, i) => v === b[i]); }
+function dimSub(a, b) { return a.map((v, i) => v - b[i]); }
+function dimAdd(a, b) { return a.map((v, i) => v + b[i]); }
+function dimStr(d) {
+  const n = ["M", "L", "T", "I"];
+  const p = [];
+  for (let i = 0; i < 4; i++) {
+    if (!d[i]) continue;
+    p.push("[" + n[i] + "]" + (d[i] === 1 ? "" : sup(d[i])));
+  }
+  return p.length ? p.join("") : "[1]";
+}
+function siUnit(d) {
+  const named = {
+    "0,0,0,0": "ไร้มิติ (1)",
+    "0,1,0,0": "เมตร (m)",
+    "1,0,0,0": "กิโลกรัม (kg)",
+    "0,0,1,0": "วินาที (s)",
+    "0,0,0,1": "แอมแปร์ (A)",
+    "0,1,-1,0": "เมตรต่อวินาที (m/s)",
+    "0,1,-2,0": "เมตรต่อวินาทียกกำลังสอง (m/s²)",
+    "1,1,-2,0": "นิวตัน (N = kg·m/s²)",
+    "1,2,-2,0": "จูล (J = kg·m²/s²)",
+    "1,2,-3,0": "วัตต์ (W = kg·m²/s³)",
+    "1,-1,-2,0": "พาสคัล (Pa = kg/(m·s²))",
+    "1,-3,0,0": "กิโลกรัมต่อลูกบาศก์เมตร (kg/m³)",
+    "-1,3,-2,0": "m³/(kg·s²)  ซึ่งเป็นหน่วยของ G",
+    "1,0,-2,0": "กิโลกรัมต่อวินาทียกกำลังสอง (kg/s²)",
+    "0,2,0,0": "ตารางเมตร (m²)",
+    "0,3,0,0": "ลูกบาศก์เมตร (m³)",
+    "0,0,-1,0": "เฮิรตซ์ (Hz = s⁻¹)"
+  };
+  const key = d.join(",");
+  if (named[key]) return named[key];
+  const bases = ["kg", "m", "s", "A"];
+  const parts = [];
+  for (let i = 0; i < 4; i++) if (d[i]) parts.push(d[i] === 1 ? bases[i] : bases[i] + sup(d[i]));
+  return parts.join("·") || "1";
+}
+function dimTags(d) {
+  const meta = [["M", "pM"], ["L", "pL"], ["T", "pT"], ["I", "pI"]];
+  const bits = [];
+  for (let i = 0; i < 4; i++) {
+    if (!d[i]) continue;
+    bits.push('<span class="pill ' + meta[i][1] + '">' + meta[i][0] + (d[i] === 1 ? "" : sup(d[i])) + "</span>");
+  }
+  if (!bits.length) bits.push('<span class="pill p1">ไร้มิติ</span>');
+  return bits.join("");
+}
+
+function speedToMs(value, prefixId) {
+  if (prefixId === "kmh") return value / 3.6;
+  return value * Math.pow(10, prefixById(prefixId).exp);
+}
+function msToSpeed(ms, prefixId) {
+  if (prefixId === "kmh") return ms * 3.6;
+  return ms / Math.pow(10, prefixById(prefixId).exp);
+}
+
+function getConversion() {
+  const info = analyzeSig(state.unitValue);
+  if (!info.ok) return { ok: false, error: info.error };
+  const q = state.quantity;
+  const from = state.fromPrefix;
+  const to = state.toPrefix;
+  if ((from === "kmh" || to === "kmh") && q !== "speed") {
+    return { ok: false, error: "หน่วย km/h ใช้กับความเร็วเท่านั้น" };
+  }
+  const sig = info.sigMin;
+  if (q === "speed") {
+    const ms = speedToMs(info.value, from);
+    const out = msToSpeed(ms, to);
+    return {
+      ok: true, info: info, out: out, text: roundToSig(out, sig), sig: sig,
+      fromLabel: from === "kmh" ? "km/h" : (prefixById(from).symbol + "m/s"),
+      toLabel: to === "kmh" ? "km/h" : (prefixById(to).symbol + "m/s"),
+      factorNote: "แปลงเข้า m/s ก่อน แล้วจึงไปหน่วยปลายทาง โดย 1 m/s = 3.6 km/h พอดี"
+    };
+  }
+  const fromP = prefixById(from);
+  const toP = prefixById(to);
+  const factorExp = fromP.exp - toP.exp;
+  const out = info.value * Math.pow(10, factorExp);
+  const unitCore = q === "mass" ? "g" : q === "time" ? "s" : q === "density" ? "g/cm³" : "m";
+  return {
+    ok: true, info: info, out: out, text: roundToSig(out, sig), sig: sig,
+    factorExp: factorExp,
+    fromLabel: fromP.symbol + unitCore,
+    toLabel: toP.symbol + unitCore,
+    unitCore: unitCore
+  };
+}
+
+function currentProblem() {
+  if (state.dimView === "sandbox") {
+    const lhs = [state.lhsM, state.lhsL, state.lhsT, state.lhsI].map(Number);
+    const t1 = [state.t1M, state.t1L, state.t1T, state.t1I].map(Number);
+    const terms = [{ name: "พจน์ที่ 1", dim: t1, how: dimStr(t1) }];
+    if (state.t2on) {
+      const t2 = [state.t2M, state.t2L, state.t2T, state.t2I].map(Number);
+      terms.push({ name: "พจน์ที่ 2", dim: t2, how: dimStr(t2) });
+    }
+    const ok = terms.every((t) => dimEq(t.dim, lhs));
+    return { title: "สมการที่กำหนดเอง", lhsName: "ซ้าย", lhs: lhs, terms: terms, ok: ok, custom: true };
+  }
+  if (state.dimView === "finder") {
+    const R = [state.fRM, state.fRL, state.fRT, state.fRI].map(Number);
+    const K = [state.fKM, state.fKL, state.fKT, state.fKI].map(Number);
+    const x = state.rel === "add" ? dimAdd(R, K) : dimSub(R, K);
+    const finder = FINDERS.find((f) => f.id === state.findId) || FINDERS[0];
+    return { title: finder.title, story: finder.story, lhsName: "X", lhs: x, result: R, known: K, rel: state.rel, finder: true };
+  }
+  return EQUATIONS.find((e) => e.id === state.equationId) || EQUATIONS[0];
+}
+
+function sigCountText(info) {
+  if (!info || !info.ok) return "—";
+  if (info.ambiguous) return info.sigMin + " ถึง " + info.sigMax + " ตัว";
+  return info.sigMin + " ตัว";
+}
+
+function getSteps() {
+  const steps = [];
+  if (state.mode === "instrument") {
+    const m = measure(state);
+    if (m.tool === "ruler") {
+      steps.push("ไม้บรรทัดขีดละ 1 mm ให้อ่านเข้าหาขีดที่ใกล้ที่สุด");
+      if (m.fromZero) {
+        steps.push("ของชิดเลข 0 อ่านแค่ปลายอีกข้าง ได้ " + formatHundredths(m.observedH) + " mm");
+        steps.push("ไม่แน่ใจครึ่งขีด คือ ±0.5 mm หรือ ±0.05 cm");
+      } else {
+        steps.push("ของไม่ชิด 0 อ่านซ้าย " + formatHundredths(m.leftR) + " mm แล้วลบออกจากขวา " + formatHundredths(m.rightR) + " mm");
+        steps.push("ได้ " + formatHundredths(m.observedH) + " mm และเพราะอ่านสองปลาย จึงไม่แน่ใจ ±1 mm");
+      }
+      steps.push("เขียนคำตอบว่า " + m.record);
+    } else if (m.tool === "vernier") {
+      const lcText = m.lcH === 10 ? "0.1" : "0.02";
+      steps.push("หาขีด 0 ของเวอร์เนีย แล้วดูขีดหลักทางซ้ายของมัน ได้ " + m.mainMm + " mm");
+      steps.push("หาขีดเวอร์เนียที่ทับกับขีดหลักพอดี คือขีดที่ " + m.n);
+      steps.push("เอา " + m.n + " × " + lcText + " mm = " + (m.n * m.lcMm).toFixed(m.lcH === 10 ? 1 : 2) + " mm");
+      steps.push("รวมกันได้ " + m.observedText + " mm");
+      if (m.zeroH) steps.push("เครื่องมือนี้ศูนย์ไม่ตรง ต้องลบออก " + formatHundredths(m.zeroH) + " mm เหลือ " + m.correctedText + " mm");
+      steps.push("ไม่แน่ใจเท่าช่องเล็กสุด คือ ±" + m.uncText + " mm จึงตอบ " + m.record);
+    } else {
+      steps.push("ดูขอบปลอกหมุนบนสเกลหลัก ได้ " + (m.parts.baseH / 100).toFixed(2) + " mm");
+      steps.push("ขีดบนปลอกหมุนที่ตรงเส้นแดงคือขีด " + m.n + " แต่ละขีดคือ 0.01 mm");
+      steps.push("เพิ่ม " + m.n + " × 0.01 = " + (m.n / 100).toFixed(2) + " mm รวมเป็น " + m.observedText + " mm");
+      if (m.zeroH) steps.push("ศูนย์ไม่ตรง ลบออก " + formatHundredths(m.zeroH) + " mm เหลือ " + m.correctedText + " mm");
+      steps.push("ไม่แน่ใจ ±0.01 mm จึงตอบ " + m.record);
+    }
+    return steps;
+  }
+  if (state.mode === "units") {
+    const c = getConversion();
+    if (!c.ok) return [c.error];
+    const from = prefixById(state.fromPrefix);
+    const to = prefixById(state.toPrefix);
+    steps.push("จำนวนนี้มีเลขนัยสำคัญ " + sigCountText(c.info) + " การคูณด้วย 10 ยกกำลังไม่ทำให้จำนวนตัวเปลี่ยน");
+    if (state.quantity === "speed") {
+      steps.push("แปลงเข้า m/s ก่อน แล้วค่อยไปหน่วยที่ต้องการ");
+      steps.push("จำง่าย ๆ ว่า 1 m/s = 3.6 km/h");
+    } else {
+      steps.push(from.name + " คือ ×10" + sup(from.exp) + " และ" + to.name + " คือ ×10" + sup(to.exp));
+      steps.push("ตัวคูณ = 10" + sup(c.factorExp) + " เอาเลขยกกำลังต้นทางลบปลายทาง");
+    }
+    steps.push("ได้ " + c.text + " " + c.toLabel);
+    if (state.quantity === "mass") steps.push("หน่วยตั้งต้นของมวลคือกิโลกรัม แต่คำนำหน้าไปติดที่กรัม เช่น mg ไม่เขียน mkg");
+    if (state.quantity === "density") {
+      const gramsPerCm3 = c.out * Math.pow(10, prefixById(state.toPrefix).exp);
+      steps.push("คิดเป็น g/cm³ ได้ " + roundToSig(gramsPerCm3, c.sig) + " ซึ่งเท่ากับ " + roundToSig(gramsPerCm3 * 1000, c.sig) + " kg/m³ เพราะ 1 g/cm³ = 1000 kg/m³");
+    }
+    if (state.fromPrefix === "c" || state.toPrefix === "c") steps.push("เซนติคือ ×100 หรือ ÷100 ไม่ใช่ก้าวทีละ 1,000 แบบกิโลกับมิลลิ");
+    return steps;
+  }
+  if (state.mode === "sigfig") {
+    const A = analyzeSig(state.sigA);
+    if (!A.ok) return [A.error];
+    steps.push("ไล่ดูทีละหลักของ " + A.raw);
+    if (A.ambiguous) steps.push("ไม่มีจุดทศนิยม แต่มีศูนย์ข้างหลัง จึงบอกได้แค่ " + A.sigMin + " ถึง " + A.sigMax + " ตัว ถ้าอยากชัดให้เขียนแบบ 1.50×10³");
+    else steps.push("นับได้ " + A.sigMin + " ตัว ศูนย์ข้างหน้าไม่นับ ศูนย์ข้างหลังจุดทศนิยมนับ");
+    const B = analyzeSig(state.sigB);
+    if (!B.ok) return steps.concat(["จำนวนที่สอง: " + B.error]);
+    const r = computeSig(state.sigA, state.sigB, state.sigOp);
+    if (!r.ok) return steps.concat([r.error]);
+    if (state.sigOp === "add" || state.sigOp === "sub") {
+      steps.push("บวกหรือลบ ดูตำแหน่งที่หยาบกว่า ไม่ได้ดูจำนวนตัว");
+      steps.push(A.raw + " ถึง" + placeName(A.placeMin) + " ส่วน " + B.raw + " ถึง" + placeName(B.placeMin));
+      steps.push("ปัดให้เหลือแค่" + placeName(r.place) + " ได้ " + r.text);
+    } else {
+      steps.push("คูณหรือหาร ใช้จำนวนตัวของฝั่งที่น้อยกว่า");
+      steps.push("เหลือ " + r.sig + " ตัว จึงตอบ " + r.text);
+      if (r.ambiguous && r.sigLoose !== r.sig) steps.push("ถ้าตีศูนย์ท้ายแบบมากสุดจะได้ถึง " + r.sigLoose + " ตัว เลยควรเขียนยกกำลังก่อนคิด");
+    }
+    return steps;
+  }
+  if (state.mode === "uncertainty") {
+    const A = Number(state.Atext), dA = Math.abs(Number(state.dAtext));
+    const B = Number(state.Btext), dB = Math.abs(Number(state.dBtext));
+    const names = { add: "A + B", sub: "A − B", mul: "A × B", div: "A / B", pow: "Aⁿ" };
+    if (state.uncOp === "add" || state.uncOp === "sub") {
+      steps.push(names[state.uncOp] + " ให้นำ ± มาบวกกัน: " + dA + " + " + dB + " = " + (dA + dB));
+    } else if (state.uncOp === "mul" || state.uncOp === "div") {
+      steps.push("คูณหรือหาร อย่าเอา ± มาบวกตรง ๆ ให้ทำเป็นเศษส่วนก่อน");
+      if (A !== 0 && B !== 0) steps.push(dA + "/" + Math.abs(A) + " + " + dB + "/" + Math.abs(B) + " = " + (dA / Math.abs(A) + dB / Math.abs(B)).toFixed(4));
+    } else {
+      steps.push("ยกกำลัง " + state.powerN + " ให้เอาเศษส่วนของ ± คูณด้วย " + Math.abs(Number(state.powerN)));
+    }
+    const p = propagate(state.uncOp, A, dA, B, dB, state.powerN);
+    if (!p.ok) return steps.concat([p.error]);
+    steps.push("ก่อนปัด ได้ประมาณ " + Number(p.Z.toPrecision(4)) + " ± " + Number(p.dZ.toPrecision(3)));
+    steps.push("ปัด ± ให้เหลือเลขตัวเดียวที่เชื่อได้ แล้วปัดค่าที่วัดให้ตรงตำแหน่งนั้น");
+    steps.push("ตอบ " + p.presented.text);
+    if (isFinite(p.percent)) steps.push("คิดเป็นร้อยละได้ประมาณ " + p.percent.toFixed(1) + "%");
+    if (state.uncOp === "sub" && Math.abs(p.Z) < p.dZ) steps.push("ผลลบเล็กกว่าช่วง ± แปลว่าหักล้างกันจนไม่แน่ใจมาก");
+    const trials = parseTrials(state.trialsText);
+    const sum = summarizeTrials(trials);
+    if (sum) {
+      steps.push("วัดซ้ำ " + sum.n + " ครั้ง เฉลี่ยได้ " + Number(sum.mean.toFixed(4)));
+      steps.push("เอาค่ามากสุดลบค่าน้อยสุด แล้วหาร 2 ได้ ±" + sum.half);
+      steps.push("เขียนค่าเฉลี่ยว่า " + presentMeasurement(sum.mean, sum.half).text);
+      if (state.showSd) steps.push("ตัวเลขเสริม s = " + sum.sd.toFixed(4) + " แต่บทนี้ใช้ครึ่งช่วงเป็นคำตอบหลัก");
+      if (state.useTrue) {
+        const miss = Math.abs(sum.mean - Number(state.trueMm));
+        steps.push(miss <= sum.half ? "ค่าเฉลี่ยยังอยู่ในช่วง ± ของค่าจริง" : "ค่าเฉลี่ยหลุดจากค่าจริง แปลว่ายังไม่แม่น");
+      }
+    }
+    return steps;
+  }
+  const problem = currentProblem();
+  if (problem.finder) {
+    steps.push(problem.story);
+    steps.push("มิติของปริมาณผลลัพธ์ = " + dimStr(problem.result));
+    steps.push("มิติของส่วนที่ทราบ = " + dimStr(problem.known));
+    if (problem.rel === "add") steps.push("รูปแบบ [X] = [ผล] + [ที่ทราบ] จึงบวกเลขชี้กำลังทีละตัว");
+    else steps.push("รูปแบบ [X] = [ผล] − [ที่ทราบ] จึงลบเลขชี้กำลังทีละตัว เช่นเดียวกับการหารหน่วย");
+    steps.push("ได้ [X] = " + dimStr(problem.lhs));
+    steps.push("หน่วย SI ที่สอดคล้องคือ " + siUnit(problem.lhs));
+    return steps;
+  }
+  steps.push("ข้างซ้าย " + problem.lhsName + " มีมิติ " + dimStr(problem.lhs));
+  problem.terms.forEach((t) => steps.push("พจน์ " + t.name + ": " + t.how + " → " + dimStr(t.dim)));
+    steps.push(problem.ok ? "ทุกพจน์เป็นหน่วยเดียวกับข้างซ้าย สมการนี้ใช้ต่อได้" : "มีพจน์ที่หน่วยไม่ตรงกัน สมการนี้ใช้ไม่ได้");
+    steps.push("หน่วยตรงกันแล้วยังอาจผิดตัวเลขข้างหน้าได้ แต่ถ้าหน่วยไม่ตรง ใช้เป็นสูตรฟิสิกส์ไม่ได้");
+  return steps;
+}
+
+function selfTest() {
+  const fails = [];
+  function check(cond, msg) { if (!cond) fails.push(msg); }
+  const a1500 = analyzeSig("1500");
+  check(a1500.ok && a1500.sigMin === 2 && a1500.sigMax === 4 && a1500.ambiguous, "1500");
+  const dotted = analyzeSig("1500.");
+  check(dotted.ok && dotted.sigMin === 4 && !dotted.ambiguous, "1500. " + (dotted.ok ? dotted.sigMin : dotted.error));
+  const a15000 = analyzeSig("1500.0");
+  check(a15000.sigMin === 5 && !a15000.ambiguous, "1500.0");
+  check(analyzeSig("0.01500").sigMin === 4, "0.01500");
+  const sci = analyzeSig("1.50×10^3");
+  check(sci.ok && sci.sigMin === 3 && Math.abs(sci.value - 1500) < 1e-6, "sci");
+  check(analyzeSig("100.01").sigMin === 5, "100.01");
+  check(analyzeSig("0.0030").sigMin === 2, "0.0030");
+  check(analyzeSig("1010").sigMin === 3 && analyzeSig("1010").sigMax === 4, "1010");
+  check(computeSig("2.5", "3.42", "mul").text === "8.6", "mul " + computeSig("2.5", "3.42", "mul").text);
+  check(computeSig("150.1", "2.345", "add").text === "152.4", "add " + computeSig("150.1", "2.345", "add").text);
+  check(computeSig("25.4", "18.12", "sub").text === "7.3", "sub " + computeSig("25.4", "18.12", "sub").text);
+  check(computeSig("4.80", "2.0", "div").text === "2.4", "div " + computeSig("4.80", "2.0", "div").text);
+  check(Math.abs(roundOneSig(0.0234) - 0.02) < 1e-9, "u 0.0234");
+  check(Math.abs(roundOneSig(0.096) - 0.1) < 1e-9, "u 0.096");
+  check(presentMeasurement(12.345, 0.0234).text === "12.35 ± 0.02", presentMeasurement(12.345, 0.0234).text);
+  check(presentMeasurement(3, 0.037).text === "3.00 ± 0.04", presentMeasurement(3, 0.037).text);
+  check(presentMeasurement(13, 0.25).text === "13.0 ± 0.3", presentMeasurement(13, 0.25).text);
+  const v1 = vernierParts(2430, 10);
+  check(v1.mm === 24 && v1.n === 3, "vernier 0.1");
+  const v2 = vernierParts(2436, 2);
+  check(v2.mm === 24 && v2.n === 18, "vernier 0.02");
+  const mic = microParts(567);
+  check(mic.baseH === 550 && mic.div === 17 && mic.observedH === 567, "micro");
+  check(roundToSig(2.5e6, 2) === "2.5×10⁶", roundToSig(2.5e6, 2));
+  check(roundToSig(10, 2) === "1.0×10¹", roundToSig(10, 2));
+  const prop = propagate("mul", 2.5, 0.01, 1.2, 0.01, 2);
+  check(prop.ok && prop.presented.text === "3.00 ± 0.04", prop.presented && prop.presented.text);
+  const g = dimSub([1, 1, -2, 0], [2, -2, 0, 0]);
+  check(dimEq(g, [-1, 3, -2, 0]), "G");
+  const s1 = EQUATIONS[0];
+  check(s1.terms.every((t) => dimEq(t.dim, s1.lhs)), "s1");
+  const bad = EQUATIONS.find((e) => e.id === "bad1");
+  check(!bad.terms.every((t) => dimEq(t.dim, bad.lhs)), "bad1");
+  const rd = measure({ tool: "vernier", lengthH: 2430, vernierLC: 0.1, useZero: false, zeroH: 0 });
+  check(rd.observedText === "24.3" && rd.n === 3, "measure vernier");
+  const ruler = measure({ tool: "ruler", lengthH: 2436, rulerFromZero: true });
+  check(ruler.record === "(2.40 ± 0.05) cm", ruler.record);
+  const vernierM = measure({ tool: "vernier", lengthH: 2430, vernierLC: 0.1, useZero: false, zeroH: 0 });
+  check(gradeAnswer("24.3", vernierM).kind === "ok", "grade mm");
+  check(gradeAnswer("2.43", vernierM).kind === "ok", "grade cm without unit");
+  check(gradeAnswer("2.43 cm", vernierM).kind === "ok", "grade cm unit");
+  check(gradeAnswer("2.40", ruler).kind === "ok", "ruler cm bare");
+  check(gradeAnswer("24", ruler).kind === "ok", "ruler mm bare");
+  const trials = summarizeTrials([25.02, 24.98, 25.06, 24.94, 25.00, 25.04, 24.96, 25.02]);
+  check(Math.abs(trials.mean - 25.0025) < 1e-9 && Math.abs(trials.half - 0.06) < 1e-9, "trials");
+  check(presentMeasurement(trials.mean, trials.half).text === "25.00 ± 0.06", presentMeasurement(trials.mean, trials.half).text);
+  ["instrument", "units", "sigfig", "uncertainty", "dimension"].forEach((mode) => {
+    const prev = state.mode;
+    state.mode = mode;
+    try {
+      const steps = getSteps();
+      if (!steps.length) fails.push("empty steps " + mode);
+    } catch (e) {
+      fails.push("steps " + mode + " " + e.message);
+    }
+    state.mode = prev;
+  });
+  return fails;
+}
+
+function parseTrials(text) {
+  return String(text || "").split(/[^0-9.+-]+/).map(Number).filter((n) => isFinite(n));
+}
+
+function setFont(ctx, size, weight) {
+  ctx.font = (weight || "400") + " " + size + "px \"Leelawadee UI\", \"Segoe UI\", Tahoma, sans-serif";
+}
+function roundRect(ctx, x, y, w, h, r) {
+  const rr = Math.max(0, Math.min(r, w / 2, h / 2));
+  ctx.beginPath();
+  ctx.moveTo(x + rr, y);
+  ctx.arcTo(x + w, y, x + w, y + h, rr);
+  ctx.arcTo(x + w, y + h, x, y + h, rr);
+  ctx.arcTo(x, y + h, x, y, rr);
+  ctx.arcTo(x, y, x + w, y, rr);
+  ctx.closePath();
+}
+function drawBackdrop(ctx, w, h) {
+  const g = ctx.createLinearGradient(0, 0, 0, h);
+  g.addColorStop(0, "#141a24");
+  g.addColorStop(1, "#0b0f16");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, w, h);
+  ctx.strokeStyle = "rgba(255,255,255,.035)";
+  ctx.lineWidth = 1;
+  for (let x = 20; x < w; x += 28) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+  }
+}
+
+function drawCaption(ctx, w, h, text) {
+  if (state._inLens) return;
+  roundRect(ctx, 16, h - 58, w - 32, 42, 10);
+  ctx.fillStyle = "rgba(8,12,18,.92)";
+  ctx.fill();
+  ctx.strokeStyle = "rgba(46,230,200,.45)";
+  ctx.stroke();
+  setFont(ctx, 16, "700");
+  ctx.fillStyle = "#d7fff6";
+  ctx.fillText(text, 28, h - 32);
+}
+
+function drawObject(ctx, x1, x2, y, shape, maxH) {
+  const gap = Math.max(2, x2 - x1);
+  const mid = (x1 + x2) / 2;
+  const limit = maxH || 72;
+  if (shape === "sphere") {
+    const rx = Math.max(4, gap / 2);
+    const ry = Math.max(6, Math.min(rx, limit / 2));
+    const g = ctx.createRadialGradient(mid - rx * 0.35, y - ry * 0.35, 4, mid, y, Math.max(rx, ry));
+    g.addColorStop(0, "#d9fff8");
+    g.addColorStop(1, "#0f766e");
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.ellipse(mid, y, rx, ry, 0, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (shape === "plate") {
+    const hh = Math.min(40, limit / 2);
+    ctx.fillStyle = "#7c3aed";
+    ctx.fillRect(x1, y - hh, gap, hh * 2);
+    ctx.fillStyle = "rgba(255,255,255,.28)";
+    ctx.fillRect(x1, y - hh, gap, Math.min(8, hh));
+  } else {
+    const hh = Math.min(28, limit / 2);
+    ctx.fillStyle = "#d97706";
+    roundRect(ctx, x1, y - hh, gap, hh * 2, Math.min(12, hh));
+    ctx.fill();
+    ctx.strokeStyle = "#92400e";
+    ctx.stroke();
+  }
+}
+
+function drawInstrument(ctx, w, h) {
+  const m = measure(state);
+  if (state.tool === "ruler") drawRuler(ctx, w, h, m);
+  else if (state.tool === "vernier") drawVernier(ctx, w, h, m);
+  else drawMicro(ctx, w, h, m);
+}
+
+function drawRuler(ctx, w, h, m) {
+  const px = Math.max(3.2, Math.min(7, (w - 90) / 90));
+  const leftMm = m.fromZero ? 0 : m.leftH / 100;
+  const rightMm = leftMm + state.lengthH / 100;
+  let scroll = clamp(leftMm - 8, 0, 70);
+  if (state._lockScroll != null) scroll = state._lockScroll;
+  const x0 = 48 - scroll * px;
+  const y = h * 0.40;
+  state.layout = { type: "ruler", x0: x0, px: px, scroll: scroll, focus: { x: x0 + rightMm * px, y: y + 8 } };
+  roundRect(ctx, 24, y - 28, w - 48, 78, 8);
+  const wood = ctx.createLinearGradient(0, y - 28, 0, y + 50);
+  wood.addColorStop(0, "#f3d7a1");
+  wood.addColorStop(1, "#e0b56a");
+  ctx.fillStyle = wood;
+  ctx.fill();
+  ctx.strokeStyle = "#8a6232";
+  ctx.stroke();
+  setFont(ctx, 13, "700");
+  ctx.fillStyle = "#ffd7a1";
+  ctx.fillText("ไม้บรรทัด (สเกลต่ำสุด 1 mm)", 36, y - 36);
+  for (let mm = 0; mm <= 160; mm++) {
+    const x = x0 + mm * px;
+    if (x < 20 || x > w - 16) continue;
+    const major = mm % 10 === 0;
+    const mid = mm % 5 === 0;
+    ctx.strokeStyle = "#3f2a16";
+    ctx.lineWidth = major ? 2 : 1;
+    ctx.beginPath();
+    ctx.moveTo(x, y - 18);
+    ctx.lineTo(x, y - 18 + (major ? 28 : mid ? 18 : 11));
+    ctx.stroke();
+    if (major) {
+      setFont(ctx, 12, "700");
+      ctx.fillStyle = "#3f2a16";
+      ctx.fillText(String(mm / 10), x - 6, y + 28);
+    }
+  }
+  const xL = x0 + leftMm * px;
+  const xR = x0 + rightMm * px;
+  drawObject(ctx, xL, xR, y + 78, state.shape, 70);
+  ctx.strokeStyle = "#b4234a";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(xL, y + 118);
+  ctx.lineTo(xR, y + 118);
+  ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(xL, y + 112); ctx.lineTo(xL, y + 124); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(xR, y + 112); ctx.lineTo(xR, y + 124); ctx.stroke();
+  ctx.fillStyle = "#14b8a6";
+  ctx.beginPath();
+  ctx.moveTo(xR, y + 52);
+  ctx.lineTo(xR - 7, y + 66);
+  ctx.lineTo(xR + 7, y + 66);
+  ctx.fill();
+  if (!state.hideReading) {
+    ctx.strokeStyle = "#b4234a";
+    ctx.lineWidth = 2;
+    [m.leftR, m.rightR].forEach((hh) => {
+      if (m.fromZero && hh === 0) return;
+      const x = x0 + hh / 100 * px;
+      ctx.beginPath(); ctx.moveTo(x, y - 22); ctx.lineTo(x, y + 34); ctx.stroke();
+    });
+  }
+  const cap = state.hideReading ? "ซ่อนเฉลยอยู่ — อ่านปลายวัตถุบนสเกล แล้วกรอกคำตอบ" : ("บันทึก " + m.record);
+  drawCaption(ctx, w, h, cap);
+}
+
+function drawVernier(ctx, w, h, m) {
+  const lc = m.lcMm;
+  const N = lc === 0.1 ? 10 : 50;
+  const spacing = 1 - lc;
+  const span = N * spacing;
+  const usable = Math.max(220, w - 130);
+  const wanted = lc === 0.1 ? 20 : 6.2;
+  const px = Math.max(lc === 0.1 ? 7 : 2.8, Math.min(wanted, usable / (span + (lc === 0.1 ? 24 : 10))));
+  const scaleMm = m.scaleH / 100;
+  let scroll = clamp(scaleMm - (w * 0.38) / px, -2, 90);
+  if (state._lockScroll != null) scroll = state._lockScroll;
+  const x0 = 70 - scroll * px;
+  const yBeam = h * 0.46;
+  const xJaw = x0 + scaleMm * px;
+  state.layout = {
+    type: "vernier", x0: x0, px: px, scroll: scroll,
+    focus: { x: state.hideReading ? xJaw : (x0 + (m.mainMm + m.n) * px), y: yBeam + 62 }
+  };
+  setFont(ctx, 14, "700");
+  ctx.fillStyle = "#e8eef8";
+  if (!state._inLens) ctx.fillText("เวอร์เนียแคลลิเปอร์ ความละเอียด " + (lc === 0.1 ? "0.1" : "0.02") + " mm", 24, 28);
+  roundRect(ctx, 20, yBeam, w - 36, 32, 6);
+  const metal = ctx.createLinearGradient(0, yBeam, 0, yBeam + 32);
+  metal.addColorStop(0, "#f8fafc");
+  metal.addColorStop(0.5, "#c5d0db");
+  metal.addColorStop(1, "#8ea0b3");
+  ctx.fillStyle = metal;
+  ctx.fill();
+  ctx.strokeStyle = "#64748b";
+  ctx.stroke();
+  ctx.fillStyle = "#334155";
+  roundRect(ctx, x0 - 26, yBeam - 78, 26, 150, 4);
+  ctx.fill();
+  roundRect(ctx, xJaw, yBeam - 78, 22, 150, 4);
+  ctx.fill();
+  ctx.fillStyle = "#0f766e";
+  ctx.fillRect(x0 - 4, yBeam - 70, 6, 46);
+  ctx.fillRect(xJaw - 2, yBeam - 70, 6, 46);
+  if (xJaw > x0 + 1) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x0, yBeam - 72, Math.max(1, xJaw - x0), 52);
+    ctx.clip();
+    drawObject(ctx, x0, xJaw, yBeam - 46, state.shape, 44);
+    ctx.restore();
+  }
+  const maxMm = 130;
+  for (let mm = -5; mm <= maxMm; mm++) {
+    const x = x0 + mm * px;
+    if (x < 8 || x > w - 8) continue;
+    ctx.strokeStyle = "#1e293b";
+    ctx.lineWidth = mm % 10 === 0 ? 1.7 : 1;
+    ctx.beginPath();
+    ctx.moveTo(x, yBeam + 2);
+    ctx.lineTo(x, yBeam + (mm % 10 === 0 ? 18 : mm % 5 === 0 ? 13 : 8));
+    ctx.stroke();
+    if (mm % 10 === 0 && mm >= 0) {
+      setFont(ctx, 11, "700");
+      ctx.fillStyle = "#e8eef8";
+      ctx.fillText(String(mm), x - 6, yBeam - 6);
+    }
+  }
+  ctx.fillStyle = "rgba(232,238,248,.92)";
+  ctx.fillRect(xJaw, yBeam + 34, span * px, 46);
+  for (let i = 0; i <= N; i++) {
+    const x = xJaw + i * spacing * px;
+    const hit = !state.hideReading && i === m.n;
+    ctx.strokeStyle = hit ? "#b4234a" : "#0f172a";
+    ctx.lineWidth = hit ? 2.4 : 1;
+    ctx.beginPath();
+    ctx.moveTo(x, yBeam + 36);
+    ctx.lineTo(x, yBeam + (i % (lc === 0.1 ? 1 : 5) === 0 ? 58 : 50));
+    ctx.stroke();
+    const gap = spacing * px;
+    const showNum = state._inLens ? (lc === 0.1 || i % 5 === 0) : (gap >= 14 || i % 10 === 0);
+    if (showNum) {
+      const fontPx = state._inLens ? Math.max(3.2, Math.min(7.5, gap * 0.58)) : Math.max(10, Math.min(13, gap * 0.72));
+      setFont(ctx, fontPx, "700");
+      ctx.fillStyle = hit ? "#b4234a" : "#0f172a";
+      ctx.textAlign = "center";
+      ctx.fillText(String(i), x, yBeam + 74);
+      ctx.textAlign = "left";
+    }
+  }
+  ctx.fillStyle = "#0f766e";
+  ctx.beginPath();
+  ctx.arc(xJaw, yBeam + 40, 4, 0, Math.PI * 2);
+  ctx.fill();
+  if (!state.hideReading) {
+    const xHit = x0 + (m.mainMm + m.n) * px;
+    ctx.strokeStyle = "rgba(180,35,74,.8)";
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.moveTo(xHit, yBeam - 2);
+    ctx.lineTo(xHit, yBeam + 64);
+    ctx.stroke();
+  }
+  const cap = state.hideReading
+    ? "ลากปากวัด แล้วหาขีดเวอร์เนียที่ตรงกับสเกลหลัก"
+    : ("สเกลหลัก " + m.mainMm + " mm + ขีด " + m.n + " × " + lc + " mm = " + m.observedText + " mm");
+  drawCaption(ctx, w, h, cap);
+}
+
+function drawMicro(ctx, w, h, m) {
+  const px = Math.max(6, Math.min(16, (w - 230) / 25));
+  const x0 = 120;
+  const scaleMm = Math.max(0, m.scaleH / 100);
+  const xEdge = x0 + scaleMm * px;
+  const yS = h * 0.38;
+  const yO = h * 0.70;
+  const exact = ((m.scaleH % 50) + 50) % 50;
+  state.layout = { type: "micro", x0: x0, px: px, scroll: 0, focus: { x: xEdge + 36, y: yS } };
+  setFont(ctx, 14, "700");
+  ctx.fillStyle = "#e8eef8";
+  if (!state._inLens) ctx.fillText("ไมโครมิเตอร์สกรูเกจ ความละเอียด 0.01 mm  พิสัย 0–25 mm", 24, 28);
+  ctx.strokeStyle = "#475569";
+  ctx.lineWidth = 10;
+  ctx.beginPath();
+  ctx.moveTo(x0 - 70, yO - 70);
+  ctx.lineTo(x0 - 70, yO + 70);
+  ctx.lineTo(x0 + 20, yO + 70);
+  ctx.stroke();
+  ctx.fillStyle = "#334155";
+  ctx.fillRect(x0 - 16, yO - 18, 16, 36);
+  ctx.fillRect(xEdge, yO - 12, 18, 24);
+  if (xEdge > x0) drawObject(ctx, x0, xEdge, yO, state.shape, 56);
+  ctx.strokeStyle = "#94a3b8";
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(xEdge, yO - 12); ctx.lineTo(xEdge, yS + 28); ctx.stroke();
+  ctx.setLineDash([]);
+  roundRect(ctx, x0 - 8, yS - 16, 25 * px + 16, 32, 6);
+  ctx.fillStyle = "#e2e8f0";
+  ctx.fill();
+  ctx.strokeStyle = "#64748b";
+  ctx.stroke();
+  for (let half = 0; half <= 50; half++) {
+    const mm = half / 2;
+    const x = x0 + mm * px;
+    const upper = half % 2 === 1;
+    ctx.strokeStyle = "#0f172a";
+    ctx.lineWidth = half % 2 === 0 ? 1.6 : 1;
+    ctx.beginPath();
+    ctx.moveTo(x, yS);
+    ctx.lineTo(x, yS + (upper ? -12 : 12));
+    ctx.stroke();
+    if (half % 10 === 0) {
+      setFont(ctx, 12, "700");
+      ctx.fillStyle = "#e8eef8";
+      ctx.textAlign = "center";
+      ctx.fillText(String(mm), x, yS + 30);
+      ctx.textAlign = "left";
+    }
+  }
+  roundRect(ctx, xEdge, yS - 46, 118, 92, 10);
+  const th = ctx.createLinearGradient(xEdge, 0, xEdge + 118, 0);
+  th.addColorStop(0, "#94a3b8");
+  th.addColorStop(0.4, "#f8fafc");
+  th.addColorStop(1, "#64748b");
+  ctx.fillStyle = th;
+  ctx.fill();
+  ctx.strokeStyle = "#334155";
+  ctx.stroke();
+  ctx.strokeStyle = "#b4234a";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(xEdge + 8, yS);
+  ctx.lineTo(xEdge + 112, yS);
+  ctx.stroke();
+  const spacing = 11;
+  for (let k = -6; k <= 6; k++) {
+    let d = Math.round(exact) + k;
+    d = ((d % 50) + 50) % 50;
+    const y = yS + (k + (Math.round(exact) - exact)) * spacing;
+    if (y < yS - 40 || y > yS + 40) continue;
+    const mark = !state.hideReading && d === m.n && k === 0;
+    ctx.strokeStyle = mark ? "#b4234a" : "#0f172a";
+    ctx.lineWidth = mark ? 2 : 1;
+    ctx.beginPath();
+    ctx.moveTo(xEdge + 18, y);
+    ctx.lineTo(xEdge + (d % 5 === 0 ? 48 : 36), y);
+    ctx.stroke();
+    if (d % 5 === 0) {
+      setFont(ctx, 12, "700");
+      ctx.fillStyle = mark ? "#b4234a" : "#0f172a";
+      ctx.fillText(String(d), xEdge + 54, y + 4);
+    }
+  }
+  const sleeveMm = m.parts.baseH / 100;
+  setFont(ctx, 14, "700");
+  ctx.fillStyle = "#ffb020";
+  ctx.textAlign = "center";
+  ctx.fillText(String(sleeveMm), x0 + sleeveMm * px, yS + 62);
+  ctx.textAlign = "left";
+  const cap = state.hideReading
+    ? "หมุนสเกลโดยลากซ้ายขวา แล้วอ่านขีดที่ตรงเส้นอ้างอิงสีแดง"
+    : ("สเกลหลัก " + (m.parts.baseH / 100).toFixed(2) + " mm + ขีด " + m.n + " × 0.01 = " + m.observedText + " mm");
+  drawCaption(ctx, w, h, cap);
+}
+
+function drawLens(ctx, w, h) {
+  if (!state.layout || !state.layout.focus) return;
+  const f = state.layout.focus;
+  const r = Math.max(72, Math.min(104, w * 0.16));
+  const cx = w - r - 16;
+  const cy = r + 16;
+  state._inLens = true;
+  ctx.save();
+  try {
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.translate(cx, cy);
+    ctx.scale(2.7, 2.7);
+    ctx.translate(-f.x, -f.y);
+    drawBackdrop(ctx, w, h);
+    drawInstrument(ctx, w, h);
+  } finally {
+    ctx.restore();
+    state._inLens = false;
+  }
+  if (state.layout) state.layout.lens = { cx: cx, cy: cy, r: r + 10 };
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "#3ee0c5";
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(cx + r * 0.62, cy + r * 0.62);
+  ctx.lineTo(cx + r + 28, cy + r + 22);
+  ctx.lineWidth = 7;
+  ctx.lineCap = "round";
+  ctx.stroke();
+  ctx.lineCap = "butt";
+  setFont(ctx, 12, "700");
+  ctx.fillStyle = "#3ee0c5";
+  ctx.fillText("แว่นขยาย", cx - 26, cy - r - 8);
+}
+
+function drawUnits(ctx, w, h) {
+  const c = getConversion();
+  setFont(ctx, 18, "700");
+  ctx.fillStyle = "#e8eef8";
+  ctx.fillText("ตัวประกอบการแปลงหน่วย", 24, 36);
+  if (!c.ok) {
+    ctx.fillStyle = "#ff5d7a";
+    ctx.fillText(c.error, 24, 80);
+    return;
+  }
+  const y = 92;
+  const boxW = Math.min(220, (w - 120) / 3);
+  function box(x, title, sub, color) {
+    roundRect(ctx, x, y, boxW, 84, 12);
+    ctx.fillStyle = color;
+    ctx.fill();
+    setFont(ctx, 13, "700");
+    ctx.fillStyle = "#9dfff4";
+    ctx.fillText(title, x + 12, y + 32);
+    setFont(ctx, 18, "700");
+    ctx.fillStyle = "#f4f7fb";
+    ctx.fillText(sub, x + 12, y + 62);
+  }
+  box(24, "ต้นทาง", state.unitValue + " " + c.fromLabel, "#12332f");
+  box(w / 2 - boxW / 2, "ผลลัพธ์", c.text + " " + c.toLabel, "#3a2c12");
+  setFont(ctx, 28, "700");
+  ctx.fillStyle = "#3ee0c5";
+  ctx.fillText("→", 24 + boxW + 8, y + 50);
+  const from = prefixById(state.fromPrefix);
+  const to = prefixById(state.toPrefix);
+  setFont(ctx, 15, "400");
+  ctx.fillStyle = "#c5d0e0";
+  const note = state.quantity === "speed"
+    ? "เส้นทาง: หน่วยต้นทาง → m/s → หน่วยปลายทาง"
+    : ("ตัวประกอบ = 10" + sup(from.exp) + " / 10" + sup(to.exp) + " = 10" + sup(c.factorExp));
+  ctx.fillText(note, 24, 210);
+  const x1 = 30;
+  const x2 = w - 30;
+  const yL = 280;
+  ctx.strokeStyle = "#94a3b8";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x1, yL);
+  ctx.lineTo(x2, yL);
+  ctx.stroke();
+  ctx.textAlign = "center";
+  PREFIXES.filter((p) => p.exp !== null).forEach((p) => {
+    const x = x1 + ((p.exp + 12) / 24) * (x2 - x1);
+    const on = p.id === state.fromPrefix || p.id === state.toPrefix;
+    ctx.fillStyle = on ? "#3ee0c5" : "#8b97a8";
+    ctx.fillRect(x - 1.5, yL - (on ? 16 : 8), 3, on ? 32 : 16);
+    setFont(ctx, on ? 13 : 11, on ? "700" : "400");
+    ctx.fillText(p.symbol || "ฐาน", x, yL + 22);
+    if (on) ctx.fillText("10" + sup(p.exp), x, yL - 24);
+  });
+  ctx.textAlign = "left";
+  setFont(ctx, 13, "700");
+  ctx.fillStyle = "#e8eef8";
+  ctx.fillText("บันไดคำนำหน้า 10⁻¹² ถึง 10¹²", 24, 348);
+}
+
+function drawSig(ctx, w, h) {
+  const info = analyzeSig(state.sigA);
+  setFont(ctx, 16, "700");
+  ctx.fillStyle = "#e8eef8";
+  ctx.fillText("สีของแต่ละหลักในจำนวนแรก", 24, 32);
+  if (!info.ok) {
+    ctx.fillStyle = "#ff5d7a";
+    ctx.fillText(info.error, 24, 80);
+    return;
+  }
+  const glyphs = info.glyphs.slice();
+  if (info.sign === "-") glyphs.unshift({ ch: "−", role: "sign" });
+  const gap = Math.min(58, (w - 40) / Math.max(1, glyphs.length + (info.sci ? 4 : 0)));
+  let x = 24;
+  const y = 120;
+  glyphs.forEach((g) => {
+    const color = g.role === "sig" ? "#3ee0c5" : g.role === "ambig" ? "#ffb020" : g.role === "leading" ? "#8b97a8" : "#e8eef8";
+    setFont(ctx, Math.min(54, gap + 6), "700");
+    ctx.fillStyle = color;
+    ctx.fillText(g.ch, x, y);
+    x += gap;
+  });
+  if (info.sci) {
+    setFont(ctx, 28, "700");
+    ctx.fillStyle = "#e8eef8";
+    ctx.fillText("×10" + sup(info.exp), x, y);
+  }
+  const legend = [["#3ee0c5", "นัยสำคัญ"], ["#8b97a8", "ศูนย์นำหน้า ไม่นับ"], ["#ffb020", "ศูนย์ท้ายที่กำกวม"]];
+  legend.forEach((item, i) => {
+    ctx.fillStyle = item[0];
+    ctx.fillRect(24, 180 + i * 32, 18, 18);
+    setFont(ctx, 16, "400");
+    ctx.fillStyle = "#e8eef8";
+    ctx.fillText(item[1], 52, 196 + i * 32);
+  });
+  setFont(ctx, 20, "700");
+  ctx.fillStyle = "#e8eef8";
+  ctx.fillText("สรุป: " + sigCountText(info) + " เลขนัยสำคัญ", 24, 320);
+  const r = computeSig(state.sigA, state.sigB, state.sigOp);
+  if (r.ok) {
+    const op = { add: "+", sub: "−", mul: "×", div: "÷" }[state.sigOp];
+    ctx.fillText(state.sigA + " " + op + " " + state.sigB + "  →  " + r.text, 24, 360);
+  }
+}
+
+function drawUncertainty(ctx, w, h) {
+  const trials = parseTrials(state.trialsText);
+  const sum = summarizeTrials(trials);
+  setFont(ctx, 16, "700");
+  ctx.fillStyle = "#e8eef8";
+  ctx.fillText("ค่าที่วัดซ้ำ แต่ละจุดคือหนึ่งครั้ง", 24, 30);
+  if (!sum) {
+    ctx.fillText("ยังไม่มีชุดข้อมูล", 24, 70);
+    return;
+  }
+  const vals = trials.slice();
+  if (state.useTrue) vals.push(Number(state.trueMm));
+  const min = Math.min.apply(null, vals.concat([sum.mean - sum.half]));
+  const max = Math.max.apply(null, vals.concat([sum.mean + sum.half]));
+  const pad = (max - min) * 0.15 || 1;
+  const a = min - pad;
+  const b = max + pad;
+  const xOf = (v) => 40 + ((v - a) / (b - a)) * (w - 80);
+  const y = 150;
+  ctx.strokeStyle = "#94a3b8";
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(30, y); ctx.lineTo(w - 24, y); ctx.stroke();
+  ctx.strokeStyle = "rgba(62,224,197,.45)";
+  ctx.lineWidth = 16;
+  ctx.beginPath();
+  ctx.moveTo(xOf(sum.mean - sum.half), y);
+  ctx.lineTo(xOf(sum.mean + sum.half), y);
+  ctx.stroke();
+  trials.forEach((v, i) => {
+    const x = xOf(v);
+    ctx.fillStyle = "#7eb6ff";
+    ctx.beginPath();
+    ctx.arc(x, y - 28 - (i % 4) * 14, 5, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.strokeStyle = "#3ee0c5";
+  ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(xOf(sum.mean), y - 70); ctx.lineTo(xOf(sum.mean), y + 24); ctx.stroke();
+  if (state.useTrue) {
+    ctx.strokeStyle = "#ff4d8d";
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath(); ctx.moveTo(xOf(Number(state.trueMm)), y - 70); ctx.lineTo(xOf(Number(state.trueMm)), y + 24); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  setFont(ctx, 14, "700");
+  ctx.fillStyle = "#3ee0c5";
+  ctx.fillText("ค่าเฉลี่ย", xOf(sum.mean) + 6, y + 42);
+  if (state.useTrue) {
+    ctx.fillStyle = "#ff8ab0";
+    ctx.fillText("ค่าจริง", Math.min(w - 70, xOf(Number(state.trueMm)) + 6), y - 76);
+  }
+  const p = propagate(state.uncOp, state.Atext, state.dAtext, state.Btext, state.dBtext, state.powerN);
+  setFont(ctx, 16, "700");
+  ctx.fillStyle = "#e8eef8";
+  ctx.fillText(p.ok ? ("ผลการส่งผ่านความไม่แน่นอน: " + p.presented.text) : p.error, 24, 250);
+  ctx.font = "15px \"Leelawadee UI\", Tahoma, sans-serif";
+  const formula = {
+    add: "Δ(A + B) = ΔA + ΔB",
+    sub: "Δ(A − B) = ΔA + ΔB",
+    mul: "Δ(AB)/|AB| = ΔA/|A| + ΔB/|B|",
+    div: "Δ(A/B)/|A/B| = ΔA/|A| + ΔB/|B|",
+    pow: "Δ(Aⁿ)/|Aⁿ| = |n|·ΔA/|A|"
+  }[state.uncOp];
+  ctx.fillText(formula, 24, 282);
+}
+
+function drawDimension(ctx, w, h) {
+  const problem = currentProblem();
+  setFont(ctx, 20, "700");
+  ctx.fillStyle = "#e8eef8";
+  ctx.fillText(problem.title, 24, 36);
+  if (problem.finder) {
+    setFont(ctx, 16, "400");
+    ctx.fillText(problem.story, 24, 72);
+    drawDimRow(ctx, 24, 120, "ผลลัพธ์", problem.result);
+    drawDimRow(ctx, 24, 180, "ส่วนที่ทราบ", problem.known);
+    drawDimRow(ctx, 24, 250, "ได้ [X]", problem.lhs);
+    setFont(ctx, 16, "700");
+    ctx.fillStyle = "#3ee0c5";
+    ctx.fillText("หน่วย: " + siUnit(problem.lhs), 24, 330);
+    return;
+  }
+  drawDimRow(ctx, 24, 80, problem.lhsName, problem.lhs);
+  problem.terms.forEach((t, i) => {
+    const match = dimEq(t.dim, problem.lhs);
+    drawDimRow(ctx, 24, 150 + i * 70, t.name, t.dim, match);
+  });
+  setFont(ctx, 22, "700");
+  ctx.fillStyle = problem.ok ? "#3ddc97" : "#ff5d7a";
+  ctx.fillText(problem.ok ? "หน่วยตรงกัน  ใช้ต่อได้" : "หน่วยไม่ตรง  ใช้สูตรนี้ไม่ได้", 24, h - 78);
+}
+
+function drawDimRow(ctx, x, y, name, dim, match) {
+  setFont(ctx, 15, "700");
+  ctx.fillStyle = "#e8eef8";
+  ctx.fillText(name, x, y);
+  const meta = [["M", "#7c3aed"], ["L", "#0284c7"], ["T", "#d97706"], ["I", "#059669"]];
+  let cx = x + 110;
+  let any = false;
+  meta.forEach((item, i) => {
+    if (!dim[i]) return;
+    any = true;
+    const label = item[0] + (dim[i] === 1 ? "" : sup(dim[i]));
+    roundRect(ctx, cx, y - 22, 62, 32, 8);
+    ctx.fillStyle = item[1];
+    ctx.fill();
+    setFont(ctx, 16, "700");
+    ctx.fillStyle = "white";
+    ctx.fillText(label, cx + 10, y);
+    cx += 70;
+  });
+  if (!any) {
+    roundRect(ctx, cx, y - 22, 72, 32, 8);
+    ctx.fillStyle = "#64748b";
+    ctx.fill();
+    ctx.fillStyle = "white";
+    setFont(ctx, 14, "700");
+    ctx.fillText("ไร้มิติ", cx + 10, y);
+  }
+  if (match !== undefined) {
+    setFont(ctx, 16, "700");
+    ctx.fillStyle = match ? "#3ddc97" : "#ff5d7a";
+    ctx.fillText(match ? "ตรง" : "ไม่ตรง", cx + 8, y);
+  }
+}
+
+function drawTarget() {
+  const canvas = document.getElementById("target");
+  if (!canvas) return;
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const w = canvas.clientWidth || 300;
+  const h = 210;
+  canvas.width = Math.floor(w * dpr);
+  canvas.height = Math.floor(h * dpr);
+  canvas.style.height = h + "px";
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+  const cx = w * 0.42;
+  const cy = h * 0.52;
+  const rings = ["#4a1830", "#7a2848", "#c45c16", "#1f6b52", "#145e52"];
+  rings.forEach((color, i) => {
+    ctx.beginPath();
+    ctx.fillStyle = color;
+    ctx.arc(cx, cy, 92 - i * 16, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(255,255,255,.22)";
+    ctx.stroke();
+  });
+  ctx.beginPath();
+  ctx.fillStyle = "#3ee0c5";
+  ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+  ctx.fill();
+  const specs = {
+    both: { x: 0, y: 0, s: 7 },
+    precise: { x: 34, y: -26, s: 6 },
+    accurate: { x: 0, y: 0, s: 30 },
+    neither: { x: 30, y: 22, s: 28 }
+  };
+  const spec = specs[state.targetScenario] || specs.both;
+  const rnd = mulberry32(state.targetScenario === "both" ? 2 : state.targetScenario === "precise" ? 3 : state.targetScenario === "accurate" ? 4 : 5);
+  for (let i = 0; i < 8; i++) {
+    const px = cx + spec.x + (rnd() - 0.5) * spec.s;
+    const py = cy + spec.y + (rnd() - 0.5) * spec.s;
+    ctx.fillStyle = "#8eb6ff";
+    ctx.beginPath();
+    ctx.arc(px, py, 4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  setFont(ctx, 12, "700");
+  ctx.fillStyle = "#e8eef8";
+  const label = {
+    both: "กลางเป้า และจุดชิดกัน",
+    precise: "จุดชิดกัน แต่ไม่กลางเป้า",
+    accurate: "กลางเป้า แต่จุดกระจาย",
+    neither: "ไม่กลาง และจุดกระจาย"
+  }[state.targetScenario];
+  ctx.fillText(label, 12, 18);
+}
+
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+function draw() {
+  try {
+    const canvas = document.getElementById("view");
+    const ctx = canvas.getContext("2d");
+    const dpr = state.view.dpr || 1;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    const w = state.view.w;
+    const h = state.view.h;
+    ctx.clearRect(0, 0, w, h);
+    drawBackdrop(ctx, w, h);
+    if (state.mode === "instrument") {
+      drawInstrument(ctx, w, h);
+      if (state.magnifier) drawLens(ctx, w, h);
+    } else if (state.mode === "units") drawUnits(ctx, w, h);
+    else if (state.mode === "sigfig") drawSig(ctx, w, h);
+    else if (state.mode === "uncertainty") drawUncertainty(ctx, w, h);
+    else drawDimension(ctx, w, h);
+    drawTarget();
+    const err = document.getElementById("err");
+    if (err && err.dataset.source === "draw") {
+      err.textContent = "";
+      delete err.dataset.source;
+    }
+  } catch (e) {
+    const el = document.getElementById("err");
+    if (el) {
+      el.dataset.source = "draw";
+      el.textContent = e.message;
+    }
+  }
+}
+
+function prefixSelect(selected) {
+  return PREFIXES.map((p) => {
+    const label = p.id === "kmh" ? "km/h (เฉพาะความเร็ว)" : (p.name + "  10" + sup(p.exp));
+    return '<option value="' + p.id + '"' + (p.id === selected ? " selected" : "") + ">" + label + "</option>";
+  }).join("");
+}
+
+function controlsHTML() {
+  return ''
+    + '<h2>เริ่มตรงนี้</h2>'
+    + '<label class="field"><span>เลือกเรื่อง</span><select class="mode-select" data-bind="mode">'
+    + '<option value="instrument">1. อ่านค่าจากเครื่องมือ</option>'
+    + '<option value="units">2. แปลงหน่วย</option>'
+    + '<option value="sigfig">3. เลขนัยสำคัญ</option>'
+    + '<option value="uncertainty">4. ค่าที่วัด ± ความไม่แน่ใจ</option>'
+    + '<option value="dimension">5. ตรวจว่าหน่วยตรงกัน</option>'
+    + '</select></label>'
+    + '<p class="muted" data-show="mode:instrument">ลากวัตถุบนรูปได้เลย วงกลมมุมขวาคือแว่นขยาย</p>'
+    + '<p class="muted" data-show="mode:units">ลอง 2.5 กิโลเมตร แปลงเป็นมิลลิเมตรดูก่อน</p>'
+    + '<p class="muted" data-show="mode:sigfig">กดตัวเลขตัวอย่างใต้รูป แล้วดูสีของแต่ละหลัก</p>'
+    + '<p class="muted" data-show="mode:uncertainty">ดูตัวเลขใหญ่ด้านขวาก่อน รูปกลางจอคือค่าที่วัดซ้ำ</p>'
+    + '<p class="muted" data-show="mode:dimension">เริ่มจากสมการตัวอย่าง สีเขียวแปลว่าหน่วยตรงกัน</p>'
+    + '<div data-show="mode:instrument">'
+    + '<div class="seg">'
+    + '<button type="button" data-action="tool" data-press="tool" data-value="ruler">ไม้บรรทัด</button>'
+    + '<button type="button" data-action="tool" data-press="tool" data-value="vernier">เวอร์เนีย</button>'
+    + '<button type="button" data-action="tool" data-press="tool" data-value="micro">ไมโครมิเตอร์</button>'
+    + '</div>'
+    + '<div data-show="tool:vernier"><div class="seg">'
+    + '<button type="button" data-action="lc" data-press="vernierLC" data-value="0.1">0.1 mm</button>'
+    + '<button type="button" data-action="lc" data-press="vernierLC" data-value="0.02">0.02 mm</button>'
+    + '</div></div>'
+    + '<div class="seg">'
+    + '<button type="button" data-action="shape" data-press="shape" data-value="sphere">ทรงกลม</button>'
+    + '<button type="button" data-action="shape" data-press="shape" data-value="cylinder">ทรงกระบอก</button>'
+    + '<button type="button" data-action="shape" data-press="shape" data-value="plate">แผ่นบาง</button>'
+    + '</div>'
+    + '<label class="field"><span>ยาวเท่าไร <b data-out="length"></b></span><input type="range" min="0" max="10000" step="1" data-bind="lengthH"></label>'
+    + '<label class="field" data-show="tool:ruler"><input type="checkbox" data-bind="rulerFromZero"> ของชิดเลข 0</label>'
+    + '<label class="field"><input type="checkbox" data-bind="magnifier"> เปิดแว่นขยาย</label>'
+    + '<label class="field"><input type="checkbox" data-bind="more"> อยากลองเพิ่ม</label>'
+    + '<div data-show="more:on">'
+    + '<label class="field"><input type="checkbox" data-bind="useZero"> ศูนย์ของเครื่องมือไม่ตรง</label>'
+    + '<label class="field" data-show="zero"><span>ศูนย์คลาดไป (mm) <b data-out="zero"></b></span><input type="range" min="-50" max="50" step="1" data-bind="zeroH"></label>'
+    + '<label class="field"><input type="checkbox" data-bind="hideReading"> ซ่อนคำตอบ แล้วให้ฉันอ่านเอง</label>'
+    + '</div>'
+    + '</div>'
+    + '<div data-show="mode:units">'
+    + '<label class="field"><span>ปริมาณ</span><select data-bind="quantity">'
+    + '<option value="length">ความยาว</option><option value="mass">มวล</option><option value="time">เวลา</option>'
+    + '<option value="speed">ความเร็ว</option><option value="density">ความหนาแน่น</option></select></label>'
+    + '<label class="field"><span>ตัวเลขตั้งต้น</span><input type="text" data-bind="unitValue" spellcheck="false"></label>'
+    + '<label class="field"><span>หน่วยตอนนี้</span><select data-bind="fromPrefix">' + prefixSelect(state.fromPrefix) + '</select></label>'
+    + '<label class="field"><span>อยากได้หน่วย</span><select data-bind="toPrefix">' + prefixSelect(state.toPrefix) + '</select></label>'
+    + '</div>'
+    + '<div data-show="mode:sigfig">'
+    + '<label class="field"><span>จำนวนแรก</span><input type="text" data-bind="sigA" spellcheck="false"></label>'
+    + '<div class="seg">'
+    + '<button type="button" data-action="sigop" data-press="sigOp" data-value="add">บวก</button>'
+    + '<button type="button" data-action="sigop" data-press="sigOp" data-value="sub">ลบ</button>'
+    + '<button type="button" data-action="sigop" data-press="sigOp" data-value="mul">คูณ</button>'
+    + '<button type="button" data-action="sigop" data-press="sigOp" data-value="div">หาร</button>'
+    + '</div>'
+    + '<label class="field"><span>จำนวนที่สอง</span><input type="text" data-bind="sigB" spellcheck="false"></label>'
+    + '<p class="muted">ลองกด 1500 กับ 1500.0 ใต้รูป จะเห็นว่าเลขศูนย์ไม่เหมือนกัน</p>'
+    + '</div>'
+    + '<div data-show="mode:uncertainty">'
+    + '<div class="row"><label class="field"><span>A</span><input type="text" data-bind="Atext"></label>'
+    + '<label class="field"><span>ΔA</span><input type="text" data-bind="dAtext"></label></div>'
+    + '<div class="row"><label class="field"><span>B</span><input type="text" data-bind="Btext"></label>'
+    + '<label class="field"><span>ΔB</span><input type="text" data-bind="dBtext"></label></div>'
+    + '<div class="seg">'
+    + '<button type="button" data-action="unc" data-press="uncOp" data-value="add">A+B</button>'
+    + '<button type="button" data-action="unc" data-press="uncOp" data-value="sub">A−B</button>'
+    + '<button type="button" data-action="unc" data-press="uncOp" data-value="mul">A×B</button>'
+    + '<button type="button" data-action="unc" data-press="uncOp" data-value="div">A/B</button>'
+    + '<button type="button" data-action="unc" data-press="uncOp" data-value="pow">Aⁿ</button>'
+    + '</div>'
+    + '<label class="field" data-show="op:pow"><span>เลขชี้กำลัง n</span><input type="number" min="-3" max="5" step="1" data-bind="powerN"></label>'
+    + '<label class="field"><span>ตัวเลขที่วัดซ้ำ คั่นด้วยจุลภาค</span><textarea data-bind="trialsText"></textarea></label>'
+    + '<label class="field"><span>สุ่มกี่ครั้ง (5–10)</span><input type="range" min="5" max="10" step="1" data-bind="trialCount"></label>'
+    + '<label class="field"><input type="checkbox" data-bind="useTrue"> มีของจริงไว้เทียบว่าแม่นไหม</label>'
+    + '<label class="field"><span>ของจริงยาว</span><input type="number" step="0.01" data-bind="trueMm"></label>'
+    + '<label class="field"><input type="checkbox" data-bind="more"> อยากลองเพิ่ม</label>'
+    + '<label class="field" data-show="more:on"><input type="checkbox" data-bind="showSd"> โชว์ตัวเลขเสริม s</label>'
+    + '</div>'
+    + '<div data-show="mode:dimension">'
+    + '<div class="seg">'
+    + '<button type="button" data-action="dim" data-press="dimView" data-value="preset">ดูตัวอย่าง</button>'
+    + '<button type="button" data-action="dim" data-press="dimView" data-value="sandbox">ลองใส่เอง</button>'
+    + '<button type="button" data-action="dim" data-press="dimView" data-value="finder">หาค่าที่หายไป</button>'
+    + '</div>'
+    + '<label class="field" data-show="dim:preset"><span>สมการ</span><select data-bind="equationId">'
+    + EQUATIONS.map((e) => '<option value="' + e.id + '">' + esc(e.title) + (e.ok ? "" : " · มีจุดผิด") + "</option>").join("")
+    + '</select></label>'
+    + '<div data-show="dim:sandbox">'
+    + dimInputs("ข้างซ้าย", "lhs")
+    + dimInputs("พจน์ที่ 1", "t1")
+    + '<label class="field"><input type="checkbox" data-bind="t2on"> ใช้พจน์ที่ 2</label>'
+    + '<div data-show="t2:on">' + dimInputs("พจน์ที่ 2", "t2") + '</div>'
+    + '</div>'
+    + '<div data-show="dim:finder">'
+    + '<label class="field"><span>โจทย์</span><select data-bind="findId">'
+    + FINDERS.map((f) => '<option value="' + f.id + '">' + esc(f.title) + "</option>").join("")
+    + '</select></label>'
+    + '<label class="field"><span>รูปแบบ</span><select data-bind="rel"><option value="sub">[X] = [ผล] − [ที่ทราบ]</option><option value="add">[X] = [ผล] + [ที่ทราบ]</option></select></label>'
+    + dimInputs("ผลลัพธ์", "fR")
+    + dimInputs("ส่วนที่ทราบ", "fK")
+    + '</div></div>'
+    + '<label class="field"><input type="checkbox" data-bind="showSteps"> โชว์เหตุผลด้านขวา</label>'
+    + '<div class="seg">'
+    + '<button type="button" class="primary" data-action="random">สุ่มของใหม่</button>'
+    + '<button type="button" data-action="step">ดูทีละขั้น</button>'
+    + '<button type="button" data-action="reset">เริ่มใหม่</button>'
+    + '</div>'
+    + '<p class="muted" data-show="mode:instrument">ลากบนรูปได้ หรือคลิกที่รูปแล้วกดลูกศรซ้ายขวา</p>';
+}
+
+function dimInputs(title, key) {
+  const axes = [["M", "M"], ["L", "L"], ["T", "T"], ["I", "I"]];
+  return '<div class="field"><span>' + title + '</span><div class="row">'
+    + axes.map((a) => '<label class="field"><span>' + a[0] + '</span><input type="number" min="-5" max="5" step="1" data-bind="' + key + a[1] + '"></label>').join("")
+    + '</div></div>';
+}
+
+function cardsHTML() {
+  if (state.mode === "instrument") {
+    const m = measure(state);
+    if (state.hideReading) {
+      return card("คำตอบ", '<p>ซ่อนไว้แล้ว ลองอ่านขีดบนรูป แล้วพิมพ์ใต้ภาพ</p>');
+    }
+    const toolName = m.tool === "ruler" ? "ไม้บรรทัด" : m.tool === "vernier" ? "เวอร์เนีย" : "ไมโครมิเตอร์";
+    const rows = [
+      ["เครื่องมือ", toolName],
+      ["ช่องเล็กสุด", m.lcMm + " mm"]
+    ];
+    if (m.tool === "vernier") rows.push(["ขีดหลัก", m.mainMm + " mm"], ["ขีดที่ตรงกัน", String(m.n)]);
+    if (m.tool === "micro") rows.push(["สเกลหลัก", (m.parts.baseH / 100).toFixed(2) + " mm"], ["ขีดบนปลอก", String(m.n)]);
+    rows.push(["ไม่แน่ใจ", "± " + (m.tool === "ruler" ? m.uncMm + " mm" : m.uncText + " mm")]);
+    if (m.zeroH) rows.push(["หลังแก้ศูนย์", m.correctedText + " mm"]);
+    const plain = m.tool === "ruler"
+      ? "ตัวเลขหน้าคือความยาวที่อ่านได้ ตัวหลัง ± คือช่วงที่ไม้บรรทัดยังไม่แน่"
+      : "เอาขีดหลักบวกกับขีดเล็กที่ตรงกัน แล้วใส่ ± เท่ากับช่องที่เล็กที่สุด";
+    return card("คำตอบ", '<div class="hero"><div class="hero-v">' + esc(m.record) + '</div><div class="hero-s">' + esc(m.mmRecord || ("อ่านได้ " + m.observedText + " mm")) + '</div></div>'
+      + '<p class="plain">' + plain + '</p>'
+      + rows.map((r) => '<div class="kv"><span>' + r[0] + '</span><b>' + esc(r[1]) + '</b></div>').join(""));
+  }
+  if (state.mode === "units") {
+    const c = getConversion();
+    if (!c.ok) return card("แปลงหน่วย", '<p class="bad">' + esc(c.error) + '</p>');
+    let extra = "";
+    if (state.quantity === "density") {
+      const g = c.out * Math.pow(10, prefixById(state.toPrefix).exp);
+      extra = '<div class="kv"><span>เทียบ kg/m³</span><b>' + esc(roundToSig(g * 1000, c.sig)) + '</b></div>';
+    }
+    if (state.quantity === "mass") extra = '<div class="kv"><span>หน่วยฐาน SI</span><b>kg</b></div>';
+    return card("ได้เท่าไร", '<div class="hero"><div class="hero-v">' + esc(c.text) + '</div><div class="hero-u">' + esc(c.toLabel) + '</div></div>'
+      + '<p class="plain">จาก ' + esc(state.unitValue + " " + c.fromLabel) + " เลขนัยสำคัญยังเท่าเดิม " + esc(sigCountText(c.info)) + "</p>" + extra);
+  }
+  if (state.mode === "sigfig") {
+    const A = analyzeSig(state.sigA);
+    const r = computeSig(state.sigA, state.sigB, state.sigOp);
+    const opName = { add: "บวก", sub: "ลบ", mul: "คูณ", div: "หาร" }[state.sigOp];
+    return card("นับได้กี่ตัว", '<div class="hero"><div class="hero-v">' + esc(A.ok ? sigCountText(A) : "—") + '</div><div class="hero-s">ของจำนวนแรก</div></div>'
+      + (r.ok ? '<div class="kv"><span>ผล' + opName + '</span><b>' + esc(r.text) + '</b></div>' : '<p class="bad">' + esc(r.error) + '</p>')
+      + (A.ok && A.ambiguous ? '<p class="plain">จำนวนนี้ยังสรุปตายตัวไม่ได้ เพราะมีศูนย์ข้างหลังแต่ไม่มีจุดทศนิยม</p>' : ""));
+  }
+  if (state.mode === "uncertainty") {
+    const p = propagate(state.uncOp, state.Atext, state.dAtext, state.Btext, state.dBtext, state.powerN);
+    const sum = summarizeTrials(parseTrials(state.trialsText));
+    let trialCard = "";
+    if (sum) {
+      const shown = presentMeasurement(sum.mean, sum.half);
+      const pct = sum.mean === 0 ? "—" : (100 * sum.half / Math.abs(sum.mean)).toFixed(2) + "%";
+      trialCard = card("วัดซ้ำได้", '<div class="hero"><div class="hero-v">' + esc(shown.text) + '</div><div class="hero-s">ค่าเฉลี่ย ± ครึ่งช่วง</div></div>'
+        + '<p class="plain">เอาค่ามากสุดลบค่าน้อยสุด แล้วหารสอง</p>'
+        + '<div class="kv"><span>เฉลี่ย</span><b>' + sum.mean.toFixed(2) + '</b></div>'
+        + '<div class="kv"><span>คิดเป็นร้อยละ</span><b>' + pct + '</b></div>'
+        + (state.showSd ? '<div class="kv"><span>ตัวเลขเสริม s</span><b>' + sum.sd.toFixed(4) + '</b></div>' : ''));
+    }
+    const body = p.ok
+      ? '<div class="hero"><div class="hero-v">' + esc(p.presented.text) + '</div><div class="hero-s">ปัด ± ให้เหลือเลขตัวเดียวก่อน</div></div>'
+        + '<p class="plain">ก่อนปัด ± มีประมาณ ' + esc(p.dZ.toPrecision(2)) + '</p>'
+        + '<div class="bar"><span style="width:' + Math.max(2, Math.min(100, p.percent || 0)) + '%"></span></div>'
+      : '<p class="bad">' + esc(p.error) + '</p>';
+    return card("คำนวณแล้วได้", body) + trialCard;
+  }
+  const problem = currentProblem();
+  if (problem.finder) {
+    return card("ค่าที่หายไปคือ", '<div class="hero"><div class="hero-v">' + dimTags(problem.lhs) + '</div><div class="hero-s">' + esc(siUnit(problem.lhs)) + '</div></div>'
+      + '<p class="plain">เอาหน่วยของผลลัพธ์ ลบหน่วยของส่วนที่รู้แล้ว</p>');
+  }
+  return card("หน่วยตรงกันไหม", '<div class="hero"><div class="hero-v" style="color:' + (problem.ok ? "var(--good)" : "var(--rose)") + '">' + (problem.ok ? "ตรงกัน" : "ไม่ตรง") + '</div></div>'
+    + '<div class="kv"><span>' + esc(problem.lhsName) + '</span><b>' + dimTags(problem.lhs) + '</b></div>'
+    + problem.terms.map((t) => '<div class="kv"><span>' + esc(t.name) + '</span><b>' + dimTags(t.dim) + '</b></div>').join("")
+    + '<p class="plain">' + esc(problem.ok ? "ทุกพจน์เป็นหน่วยเดียวกับข้างซ้าย" : "มีพจน์ที่หน่วยคนละแบบ บวกกันไม่ได้") + '</p>');
+}
+
+function card(title, body) {
+  return '<section class="card"><h3>' + title + '</h3>' + body + '</section>';
+}
+
+function stepsHTML() {
+  if (state.mode === "instrument" && state.hideReading) return '<p class="muted">คำตอบถูกซ่อนอยู่ ลองอ่านเองก่อน แล้วค่อยปิดการซ่อนเพื่อดูวิธีคิด</p>';
+  if (!state.showSteps) return '<p class="muted">ติ๊ก “โชว์เหตุผลด้านขวา” หรือกดดูทีละขั้น</p>';
+  const steps = getSteps();
+  const n = Math.min(steps.length, state.reveal);
+  return '<ol class="steps">' + steps.slice(0, n).map((s) => "<li>" + esc(s) + "</li>").join("") + "</ol>"
+    + (n < steps.length ? '<p class="muted">ยังมีอีก ' + (steps.length - n) + ' ขั้น</p>' : "");
+}
+
+function misHTML() {
+  const text = {
+    instrument: "ไม้บรรทัดไม่แน่ใจครึ่งขีด ส่วนเวอร์เนียกับไมโครมิเตอร์ไม่แน่ใจเท่าช่องเล็กสุด แม่นคือใกล้ของจริง เที่ยงคือวัดซ้ำแล้วได้ค่าใกล้กัน",
+    units: "มวลหน่วยตั้งต้นคือกิโลกรัม แต่เขียนคำนำหน้าที่กรัม เช่น mg ได้ ไม่เขียน mkg เซนติคือ 100 ไม่ใช่ 1,000",
+    sigfig: "ศูนย์ข้างหน้าไม่นับ ศูนย์ข้างหลังจุดทศนิยมนับ บวกลบดูตำแหน่ง คูณหารดูจำนวนตัว คนละกฎกัน",
+    uncertainty: "บวกหรือลบ ให้นำ ± มาบวกกัน คูณหรือหาร ให้ทำ ± เป็นเศษส่วนก่อน ตอนตอบ ปัด ± ให้เหลือเลขตัวเดียว",
+    dimension: "บวกได้เฉพาะหน่วยเดียวกัน ½ กับ π ไม่มีหน่วย ถ้าหน่วยไม่ตรง สูตรนี้ใช้ไม่ได้"
+  }[state.mode];
+  return "<strong>จำไว้ข้อเดียว</strong><p>" + text + "</p>";
+}
+
+function analyticsShell() {
+  const target = (state.mode === "instrument" || state.mode === "uncertainty")
+    ? '<section class="card"><h3>แม่นกับเที่ยง ต่างกันยังไง</h3><canvas id="target"></canvas>'
+      + '<div class="seg">'
+      + '<button type="button" data-action="scenario" data-press="targetScenario" data-value="both">กลางและชิด</button>'
+      + '<button type="button" data-action="scenario" data-press="targetScenario" data-value="precise">ชิดแต่ไม่กลาง</button>'
+      + '<button type="button" data-action="scenario" data-press="targetScenario" data-value="accurate">กลางแต่กระจาย</button>'
+      + '<button type="button" data-action="scenario" data-press="targetScenario" data-value="neither">ไม่กลางและกระจาย</button>'
+      + '</div><p class="muted">จุดกลางคือของจริง จุดชิดกันคือวัดซ้ำแล้วได้ค่าใกล้กัน</p></section>'
+    : "";
+  return '<div id="liveCards"></div>' + target
+    + '<section class="card"><h3>ทำไมได้คำตอบนี้</h3><div id="liveSteps"></div></section>'
+    + '<section class="mis" id="liveMis"></section>';
+}
+
+function dockHTML() {
+  if (state.mode === "instrument") {
+    return '<label class="field"><span>ลองพิมพ์คำตอบเอง</span><input id="answerBox" type="text" data-bind="studentAnswer" placeholder="เช่น 24.3 หรือ 2.43 cm"></label>'
+      + '<button type="button" class="primary" data-action="check">ตรวจดู</button> <span id="feedback"></span>';
+  }
+  if (state.mode === "units") {
+    return '<div class="base-grid">' + BASES.map((b) => '<div class="chip"><b>' + b[0] + '</b>' + b[1] + ' (' + b[2] + ')</div>').join("") + '</div>'
+      + '<p class="muted">หน่วย 7 ตัวนี้เป็นหน่วยตั้งต้น หน่วยอื่นสร้างจากพวกนี้</p>';
+  }
+  if (state.mode === "sigfig") {
+    const samples = ["1500", "1500.", "1500.0", "0.01500", "1.50×10^3", "100.01", "0.0030", "1010"];
+    return '<div class="ex-grid">' + samples.map((s) => '<button type="button" data-action="sample" data-value="' + esc(s) + '">' + esc(s) + '</button>').join("") + '</div>';
+  }
+  if (state.mode === "uncertainty") {
+    return '<p class="muted">แถบสีฟ้าอมเขียวคือช่วงที่ไม่แน่ใจ จุดฟ้าคือแต่ละครั้งที่วัด เส้นชมพูคือของจริง</p>';
+  }
+  const derived = [
+    ["ความเร็ว", "LT⁻¹"], ["ความเร่ง", "LT⁻²"], ["แรง", "MLT⁻²"], ["พลังงาน", "ML²T⁻²"], ["ความดัน", "ML⁻¹T⁻²"], ["ความหนาแน่น", "ML⁻³"]
+  ];
+  return '<div class="base-grid">' + derived.map((d) => '<div class="chip"><b>' + d[0] + '</b>[' + d[1] + ']</div>').join("") + '</div>';
+}
+
+function visible(spec) {
+  if (spec === "zero") return !!state.useZero && state.tool !== "ruler";
+  if (spec === "more:on") return !!state.more;
+  if (spec === "t2:on") return !!state.t2on;
+  const bits = spec.split(":");
+  const map = { mode: state.mode, tool: state.tool, op: state.uncOp, dim: state.dimView };
+  return bits[1].split("|").includes(String(map[bits[0]]));
+}
+
+function outText(key) {
+  if (key === "length") return (state.lengthH / 100).toFixed(2) + " mm";
+  if (key === "zero") return (state.zeroH / 100).toFixed(2) + " mm";
+  return "";
+}
+
+function syncControls() {
+  document.querySelectorAll("[data-bind]").forEach((el) => {
+    if (document.activeElement === el) return;
+    const val = state[el.dataset.bind];
+    if (el.type === "checkbox") el.checked = !!val;
+    else if (String(el.value) !== String(val)) el.value = val;
+  });
+  document.querySelectorAll("[data-out]").forEach((el) => { el.textContent = outText(el.dataset.out); });
+  document.querySelectorAll("[data-press]").forEach((el) => {
+    el.classList.toggle("active", String(state[el.dataset.press]) === el.dataset.value);
+  });
+  document.querySelectorAll("[data-show]").forEach((el) => { el.hidden = !visible(el.dataset.show); });
+  document.querySelectorAll('option[value="kmh"]').forEach((el) => { el.disabled = state.quantity !== "speed"; });
+  const maxLen = state.tool === "micro" ? 2500 : 10000;
+  document.querySelectorAll('[data-bind="lengthH"]').forEach((el) => { el.max = String(maxLen); });
+  const zStep = state.tool === "micro" ? 1 : (Math.abs(state.vernierLC - 0.02) < 1e-6 ? 2 : 10);
+  document.querySelectorAll('[data-bind="zeroH"]').forEach((el) => { el.step = String(zStep); });
+}
+
+function renderSide() {
+  document.getElementById("stageBar").textContent = OBJECTIVES[state.mode];
+  const dock = document.getElementById("dock");
+  if (dock.dataset.mode !== state.mode) {
+    dock.dataset.mode = state.mode;
+    dock.innerHTML = dockHTML();
+  }
+  const fb = document.getElementById("feedback");
+  if (fb) {
+    fb.textContent = state.feedback;
+    fb.className = state.feedbackKind || "hint";
+  }
+  const root = document.getElementById("analytics");
+  if (root.dataset.mode !== state.mode) {
+    root.dataset.mode = state.mode;
+    root.innerHTML = analyticsShell();
+  }
+  document.getElementById("liveCards").innerHTML = cardsHTML();
+  document.getElementById("liveSteps").innerHTML = stepsHTML();
+  document.getElementById("liveMis").innerHTML = misHTML();
+}
+
+function applyConstraints() {
+  if (state.quantity !== "speed") {
+    if (state.fromPrefix === "kmh") state.fromPrefix = "k";
+    if (state.toPrefix === "kmh") state.toPrefix = "base";
+  }
+  state.lengthH = Math.round(clamp(Number(state.lengthH) || 0, 0, state.tool === "micro" ? 2500 : 10000));
+  state.zeroH = Math.round(clamp(Number(state.zeroH) || 0, -50, 50));
+  if (state.useZero && state.tool !== "ruler") {
+    const step = state.tool === "micro" ? 1 : (Math.abs(state.vernierLC - 0.02) < 1e-6 ? 2 : 10);
+    state.zeroH = Math.round(state.zeroH / step) * step;
+  }
+  state.powerN = Math.round(clamp(Number(state.powerN) || 1, -3, 5));
+  if (state.powerN === 0) state.powerN = 1;
+  state.trialCount = Math.round(clamp(Number(state.trialCount) || 8, 5, 10));
+  ["lhs", "t1", "t2", "fR", "fK"].forEach((p) => {
+    ["M", "L", "T", "I"].forEach((a) => {
+      const key = p + a;
+      state[key] = Math.round(clamp(Number(state[key]) || 0, -5, 5));
+    });
+  });
+}
+
+function refresh() {
+  applyConstraints();
+  renderSide();
+  syncControls();
+  draw();
+}
+
+function doRandom() {
+  if (state.mode === "instrument") {
+    const max = state.tool === "micro" ? 2000 : 8600;
+    state.lengthH = 200 + Math.floor(Math.random() * max);
+    state.shape = ["sphere", "cylinder", "plate"][Math.floor(Math.random() * 3)];
+    state.hideReading = false;
+  } else if (state.mode === "units") {
+    const qs = ["length", "mass", "time", "speed", "density"];
+    state.quantity = qs[Math.floor(Math.random() * qs.length)];
+    const ids = PREFIXES.filter((p) => p.exp !== null).map((p) => p.id);
+    state.fromPrefix = ids[Math.floor(Math.random() * ids.length)];
+    state.toPrefix = ids[Math.floor(Math.random() * ids.length)];
+    state.unitValue = (Math.round((0.8 + Math.random() * 8) * 10) / 10).toFixed(1);
+  } else if (state.mode === "sigfig") {
+    const pool = [["1500", "2.50", "mul"], ["12.30", "1.4", "add"], ["0.01500", "3.0", "mul"], ["25.4", "18.12", "sub"], ["4.80", "2.0", "div"]];
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    state.sigA = pick[0]; state.sigB = pick[1]; state.sigOp = pick[2];
+  } else if (state.mode === "uncertainty") {
+    const n = state.trialCount;
+    const res = 0.02;
+    const center = Math.round((20 + Math.random() * 10) / res) * res;
+    const arr = [];
+    for (let i = 0; i < n; i++) {
+      const z = (Math.random() + Math.random() + Math.random() - 1.5) * 0.12;
+      arr.push((Math.round((center + z) / res) * res).toFixed(2));
+    }
+    state.trialsText = arr.join(", ");
+    state.trueMm = Number(center.toFixed(2));
+  } else {
+    const ids = EQUATIONS.map((e) => e.id);
+    state.dimView = "preset";
+    state.equationId = ids[Math.floor(Math.random() * ids.length)];
+  }
+  state.reveal = 99;
+  state.feedback = "สุ่มของใหม่แล้ว ลองอ่านดูก่อน";
+  state.feedbackKind = "hint";
+  state.feedbackOk = false;
+}
+
+function doReset() {
+  const keep = state.mode;
+  const fresh = {
+    tool: "vernier", vernierLC: 0.1, lengthH: 2430, shape: "cylinder", magnifier: true,
+    hideReading: false, useZero: false, zeroH: 0, rulerFromZero: true, rulerOffsetH: 1800,
+    quantity: "length", fromPrefix: "k", toPrefix: "m", unitValue: "2.5",
+    sigA: "1500", sigB: "2.50", sigOp: "mul",
+    Atext: "2.50", dAtext: "0.01", Btext: "1.20", dBtext: "0.01", powerN: 2, uncOp: "mul",
+    trialsText: "25.02, 24.98, 25.06, 24.94, 25.00, 25.04, 24.96, 25.02",
+    trialCount: 8, trueMm: 25, useTrue: true, showSd: false,
+    equationId: "s1", dimView: "preset", findId: "G", rel: "sub",
+    targetScenario: "both", studentAnswer: "", showSteps: true, reveal: 99, more: false
+  };
+  Object.keys(fresh).forEach((k) => { state[k] = fresh[k]; });
+  state.mode = keep;
+  applyFinder("G");
+  state.feedback = "เริ่มใหม่แล้ว";
+  state.feedbackKind = "hint";
+  state.feedbackOk = false;
+}
+
+function doStep() {
+  state.showSteps = true;
+  const n = getSteps().length;
+  state.reveal = state.reveal >= n ? 1 : state.reveal + 1;
+}
+
+function gradeAnswer(raw, m) {
+  const text = String(raw || "").trim().toLowerCase().replace(/,/g, ".").replace(/\.$/, "");
+  const match = text.match(/^([+-]?\d+(?:\.\d+)?)\s*(mm|cm|มม\.|ซม\.)?$/);
+  if (!match) return { kind: "bad", feedback: "กรอกเป็นตัวเลข เช่น 24.3 หรือ 2.43 cm" };
+  const num = Number(match[1]);
+  const unit = match[2] || "";
+  const expected = m.correctedH / 100;
+  const tol = Math.max(m.uncMm / 2, 0.001);
+  const near = (a, b) => Math.abs(a - b) <= tol + 1e-6;
+  let valueMm = num;
+  if (unit === "cm" || unit === "ซม.") valueMm = num * 10;
+  else if (!unit) {
+    if (near(num * 10, expected)) valueMm = num * 10;
+    else valueMm = num;
+  }
+  if (near(valueMm, expected)) return { kind: "ok", feedback: "ถูกแล้ว เขียนแบบนี้ได้เลย " + m.record };
+  if (m.zeroH && near(valueMm, m.observedH / 100)) return { kind: "bad", feedback: "อ่านถูกแล้ว แต่อย่าลืมลบค่าที่ศูนย์คลาด" };
+  return { kind: "bad", feedback: "ยังไม่ตรง ดูขีดที่ทับกันอีกครั้ง แล้วลองใหม่ได้" };
+}
+
+function checkAnswer() {
+  const graded = gradeAnswer(state.studentAnswer, measure(state));
+  state.feedback = graded.feedback;
+  state.feedbackKind = graded.kind;
+  state.feedbackOk = graded.kind === "ok";
+}
+
+function applyFinder(id) {
+  const f = FINDERS.find((item) => item.id === id);
+  if (!f || id === "custom") return;
+  state.rel = f.rel;
+  [state.fRM, state.fRL, state.fRT, state.fRI] = f.result;
+  [state.fKM, state.fKL, state.fKT, state.fKI] = f.known;
+}
+
+function onClick(e) {
+  const b = e.target.closest("[data-action]");
+  if (!b) return;
+  const action = b.dataset.action;
+  const value = b.dataset.value;
+  if (action === "tool") state.tool = value;
+  else if (action === "lc") state.vernierLC = Number(value);
+  else if (action === "shape") state.shape = value;
+  else if (action === "sigop") state.sigOp = value;
+  else if (action === "unc") state.uncOp = value;
+  else if (action === "dim") state.dimView = value;
+  else if (action === "scenario") state.targetScenario = value;
+  else if (action === "sample") state.sigA = value;
+  else if (action === "random") doRandom();
+  else if (action === "reset") doReset();
+  else if (action === "step") doStep();
+  else if (action === "check") checkAnswer();
+  refresh();
+}
+
+function onInput(e) {
+  const el = e.target.closest("[data-bind]");
+  if (!el) return;
+  const key = el.dataset.bind;
+  if (el.type === "checkbox") state[key] = el.checked;
+  else if (el.type === "number" || el.type === "range") state[key] = Number(el.value);
+  else state[key] = el.value;
+  if (key === "findId") applyFinder(state.findId);
+  if (/^(fR|fK)/.test(key) || key === "rel") state.findId = "custom";
+  refresh();
+}
+
+function canvasPos(e) {
+  const c = document.getElementById("view");
+  const r = c.getBoundingClientRect();
+  return {
+    x: (e.clientX - r.left) * (state.view.w / r.width),
+    y: (e.clientY - r.top) * (state.view.h / r.height)
+  };
+}
+
+function onDown(e) {
+  if (state.mode !== "instrument" || !state.layout) return;
+  const p = canvasPos(e);
+  const lens = state.layout.lens;
+  if (lens && state.magnifier) {
+    const dx = p.x - lens.cx;
+    const dy = p.y - lens.cy;
+    if (dx * dx + dy * dy <= lens.r * lens.r) return;
+  }
+  state.dragging = true;
+  state._lockScroll = state.layout.scroll || 0;
+  state._drag = { x: p.x, y: p.y, lengthH: state.lengthH, x0: state.layout.x0, px: state.layout.px };
+  e.currentTarget.setPointerCapture(e.pointerId);
+}
+
+function onMove(e) {
+  if (!state.dragging || !state._drag) return;
+  const p = canvasPos(e);
+  const d = state._drag;
+  if (state.tool === "micro") {
+    const deltaH = Math.round((p.x - d.x) / d.px * 100 + (d.y - p.y) * 1.5);
+    state.lengthH = d.lengthH + deltaH;
+  } else if (state.tool === "ruler") {
+    const rightH = Math.round((p.x - d.x0) / d.px * 100);
+    const leftH = state.rulerFromZero ? 0 : state.rulerOffsetH;
+    state.lengthH = rightH - leftH;
+  } else {
+    const scaleH = Math.round((p.x - d.x0) / d.px * 100);
+    state.lengthH = scaleH - (state.useZero ? state.zeroH : 0);
+  }
+  refresh();
+}
+
+function onUp() {
+  state.dragging = false;
+  state._drag = null;
+  state._lockScroll = null;
+  refresh();
+}
+
+function resize() {
+  const canvas = document.getElementById("view");
+  const parent = canvas.parentElement;
+  if (!parent || parent.clientWidth < 40) return;
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const w = Math.max(300, parent.clientWidth - 28);
+  const h = Math.round(Math.max(430, Math.min(540, w * 0.62)));
+  state.view = { w: w, h: h, dpr: dpr };
+  canvas.style.width = w + "px";
+  canvas.style.height = h + "px";
+  canvas.width = Math.floor(w * dpr);
+  canvas.height = Math.floor(h * dpr);
+}
+
+function readRoute() {
+  const q = new URLSearchParams(location.search);
+  const mode = q.get("mode") || String(location.hash || "").replace("#", "");
+  if (OBJECTIVES[mode]) state.mode = mode;
+  const tool = q.get("tool");
+  if (tool === "ruler" || tool === "vernier" || tool === "micro") state.tool = tool;
+}
+
+function init(fails) {
+  readRoute();
+  applyFinder(state.findId);
+  document.getElementById("controls").innerHTML = controlsHTML();
+  document.body.addEventListener("click", onClick);
+  document.body.addEventListener("input", onInput);
+  document.body.addEventListener("change", onInput);
+  const canvas = document.getElementById("view");
+  canvas.addEventListener("pointerdown", onDown);
+  canvas.addEventListener("pointermove", onMove);
+  canvas.addEventListener("pointerup", onUp);
+  canvas.addEventListener("pointercancel", onUp);
+  canvas.tabIndex = 0;
+  canvas.addEventListener("keydown", (e) => {
+    if (state.mode !== "instrument") return;
+    const step = state.tool === "ruler" ? 100 : state.tool === "micro" ? 1 : (state.vernierLC === 0.02 ? 2 : 10);
+    if (e.key === "ArrowRight") state.lengthH += step;
+    else if (e.key === "ArrowLeft") state.lengthH -= step;
+    else return;
+    e.preventDefault();
+    refresh();
+  });
+  window.addEventListener("resize", () => { resize(); refresh(); });
+  resize();
+  refresh();
+  if (fails && fails.length) document.getElementById("err").textContent = fails.join(" | ");
+}
+
+const testFails = selfTest();
+if (typeof document === "undefined") {
+  if (testFails.length) {
+    console.log(testFails.join("\n"));
+    throw new Error("selfTest failed");
+  }
+  console.log("selfTest ok");
+} else {
+  init(testFails);
+}
+</script>
+</body>
+</html>
