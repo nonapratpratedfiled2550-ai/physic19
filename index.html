@@ -23,7 +23,7 @@
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
   html { color-scheme: dark; }
-  html, body { margin: 0; padding: 0; }
+  html, body { margin: 0; padding: 0; height: 100%; }
   body {
     font-family: "Leelawadee UI", "Segoe UI", Tahoma, sans-serif;
     color: var(--ink);
@@ -33,36 +33,51 @@
       var(--bg);
     line-height: 1.55;
     font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
   header {
     display: flex;
     justify-content: space-between;
     gap: 16px;
     align-items: center;
-    padding: 16px 22px;
+    padding: 8px 16px;
     color: white;
     background: linear-gradient(120deg, #05070c, #101820 55%, #0c2e2a);
     border-bottom: 1px solid rgba(46, 230, 200, .35);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, .35);
+    flex: none;
   }
-  header h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: 0; }
-  header p { margin: 4px 0 0; color: #b7c3d6; font-size: 14px; }
+  header h1 { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: 0; }
+  header p { margin: 2px 0 0; color: #b7c3d6; font-size: 13px; }
   .mark {
-    width: 52px; height: 52px; border-radius: 16px;
+    width: 40px; height: 40px; border-radius: 12px;
     display: grid; place-items: center;
     background: linear-gradient(160deg, rgba(46, 230, 200, .25), rgba(139, 124, 255, .2));
     border: 1px solid rgba(46, 230, 200, .45);
     color: #d9fff6;
-    font-size: 28px; font-weight: 700;
+    font-size: 22px; font-weight: 700;
     box-shadow: 0 0 24px rgba(46, 230, 200, .25);
   }
-  .brand { display: flex; gap: 14px; align-items: center; }
-  .layout {
-    display: grid;
-    grid-template-columns: minmax(270px, 320px) minmax(0, 1fr) minmax(290px, 360px);
-    gap: 14px;
-    padding: 14px;
-    align-items: start;
+  .brand { display: flex; gap: 12px; align-items: center; }
+  .stage-wrap {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .hud {
+    flex: none;
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+    padding: 10px 12px 0;
+  }
+  .canvas-frame {
+    flex: 1;
+    min-height: 0;
+    position: relative;
   }
   .panel {
     background: var(--card);
@@ -70,12 +85,6 @@
     border-radius: 18px;
     box-shadow: var(--shadow);
   }
-  .controls, .analytics {
-    padding: 14px;
-    max-height: calc(100vh - 118px);
-    overflow: auto;
-  }
-  .stage { padding: 12px; }
   h2 { margin: 0 0 8px; font-size: 18px; }
   h3 { margin: 0 0 8px; font-size: 15px; color: var(--navy); }
   .muted { color: var(--muted); font-size: 13.5px; }
@@ -140,17 +149,119 @@
   }
   .mis strong { color: #ffd089; }
   #stageBar {
+    flex: 1;
     background: #10211f;
     border: 1px solid #1f6f66;
     color: #d7fff6;
     border-radius: 12px;
     padding: 8px 10px;
-    margin-bottom: 10px;
+    margin: 0;
     font-size: 14.5px;
   }
-  #view, #target { width: 100%; display: block; border-radius: 12px; background: #0c1016; }
-  #view { touch-action: none; cursor: crosshair; }
-  #dock { margin-top: 10px; }
+  #answerChip {
+    flex: 0 1 auto;
+    max-width: 46%;
+    background: rgba(8, 14, 20, .92);
+    border: 1px solid rgba(46, 230, 200, .5);
+    border-radius: 14px;
+    padding: 6px 12px;
+    text-align: right;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .35);
+  }
+  .chip-k { display: block; color: var(--muted); font-size: 12px; }
+  .chip-v { display: block; color: white; font-size: 22px; font-weight: 700; line-height: 1.2; }
+  #view {
+    position: absolute;
+    left: 12px;
+    top: 10px;
+    touch-action: none;
+    cursor: crosshair;
+    border-radius: 16px;
+    background: #0c1016;
+  }
+  #target { width: 100%; display: block; border-radius: 12px; background: #0c1016; }
+  #dock {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    width: min(520px, calc(100% - 280px));
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: rgba(12, 16, 24, .94);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+  #dock .field { flex: 1; margin: 0; }
+  #dock .field span { margin: 0 0 4px; }
+  .fabs {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 14px;
+    z-index: 40;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+  .fab {
+    pointer-events: auto;
+    min-width: 108px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: #10211f;
+    color: #d7fff6;
+    border: 1px solid rgba(46, 230, 200, .55);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .4), 0 0 18px rgba(46, 230, 200, .18);
+    font-weight: 700;
+  }
+  .fab.on, .fab:hover { background: var(--teal); color: #041311; }
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    background: rgba(0, 0, 0, .46);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+  }
+  .backdrop.open { opacity: 1; pointer-events: auto; }
+  .sheet {
+    position: fixed;
+    z-index: 30;
+    left: 16px;
+    bottom: 78px;
+    width: min(420px, calc(100vw - 32px));
+    max-height: min(74vh, 760px);
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border: 1px solid rgba(46, 230, 200, .35);
+    border-radius: 18px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .5);
+    transform: translateY(18px) scale(.96);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .22s ease, opacity .22s ease;
+  }
+  .sheet.sheet-right { left: auto; right: 16px; width: min(460px, calc(100vw - 32px)); }
+  .sheet.open {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .sheet-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 12px 0;
+  }
+  .sheet-bar h2 { margin: 0; }
+  .sheet-body { overflow: auto; padding: 8px 14px 16px; }
   .base-grid, .ex-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
   .chip {
     border: 1px solid var(--line);
@@ -170,16 +281,18 @@
   ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-thumb { background: #314158; border-radius: 99px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  footer { text-align: center; color: var(--muted); font-size: 12.5px; padding: 4px 16px 18px; }
+  footer { display: none; }
   #err { color: var(--rose); font-weight: 700; padding: 0 16px; min-height: 0; }
   button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible {
     outline: 3px solid var(--teal); outline-offset: 2px;
   }
-  @media (max-width: 1100px) {
-    .layout { grid-template-columns: 1fr; }
-    .controls, .analytics { max-height: none; }
-    header { flex-direction: column; align-items: flex-start; }
-    header h1 { font-size: 22px; }
+  @media (max-width: 800px) {
+    header p { display: none; }
+    #answerChip { max-width: 58%; }
+    .chip-v { font-size: 16px; }
+    #dock { width: calc(100% - 16px); bottom: 68px; }
+    .fabs { bottom: 10px; }
+    .sheet, .sheet.sheet-right { left: 8px; right: 8px; width: auto; bottom: 70px; }
   }
 </style>
 </head>
@@ -194,14 +307,28 @@
     </div>
   </div>
 </header>
-<main class="layout">
-  <aside id="controls" class="panel controls"></aside>
-  <section class="panel stage">
+<main class="stage-wrap">
+  <div class="hud">
     <div id="stageBar"></div>
+    <div id="answerChip"></div>
+  </div>
+  <div class="canvas-frame">
     <canvas id="view" width="800" height="480" aria-label="พื้นที่จำลองเชิงโต้ตอบ"></canvas>
     <div id="dock"></div>
-  </section>
-  <aside id="analytics" class="panel analytics"></aside>
+    <div class="fabs">
+      <button type="button" class="fab" id="openTune" data-sheet="tune" aria-expanded="false">ปรับค่า</button>
+      <button type="button" class="fab" id="openGraph" data-sheet="graph" aria-expanded="false">กราฟ</button>
+    </div>
+  </div>
+  <div id="backdrop" class="backdrop"></div>
+  <aside id="sheetTune" class="sheet" aria-hidden="true">
+    <div class="sheet-bar"><h2>ปรับค่า</h2><button type="button" data-close="tune">ปิด</button></div>
+    <div id="controls" class="sheet-body"></div>
+  </aside>
+  <aside id="sheetGraph" class="sheet sheet-right" aria-hidden="true">
+    <div class="sheet-bar"><h2 id="graphTitle">กราฟ</h2><button type="button" data-close="graph">ปิด</button></div>
+    <div id="analytics" class="sheet-body"></div>
+  </aside>
 </main>
 <footer>บทที่ 1 ฟิสิกส์เพิ่มเติม ม.4 · แม่น = ใกล้ของจริง · เที่ยง = วัดซ้ำแล้วได้ค่าใกล้กัน</footer>
 <script>
@@ -1338,7 +1465,7 @@ function drawLens(ctx, w, h) {
   if (!state.layout || !state.layout.focus) return;
   const f = state.layout.focus;
   const r = Math.max(72, Math.min(104, w * 0.16));
-  const cx = w - r - 16;
+  const cx = w - r - 40;
   const cy = r + 16;
   state._inLens = true;
   ctx.save();
@@ -1363,7 +1490,7 @@ function drawLens(ctx, w, h) {
   ctx.stroke();
   ctx.beginPath();
   ctx.moveTo(cx + r * 0.62, cy + r * 0.62);
-  ctx.lineTo(cx + r + 28, cy + r + 22);
+  ctx.lineTo(cx + r + 18, cy + r + 16);
   ctx.lineWidth = 7;
   ctx.lineCap = "round";
   ctx.stroke();
@@ -1767,7 +1894,8 @@ function controlsHTML() {
     + '<button type="button" data-action="sigop" data-press="sigOp" data-value="div">หาร</button>'
     + '</div>'
     + '<label class="field"><span>จำนวนที่สอง</span><input type="text" data-bind="sigB" spellcheck="false"></label>'
-    + '<p class="muted">ลองกด 1500 กับ 1500.0 ใต้รูป จะเห็นว่าเลขศูนย์ไม่เหมือนกัน</p>'
+    + '<p class="muted">ลองกดตัวเลขตัวอย่าง แล้วดูสีของแต่ละหลัก</p>'
+    + '<div class="ex-grid">' + ["1500", "1500.", "1500.0", "0.01500", "1.50×10^3", "100.01", "0.0030", "1010"].map((s) => '<button type="button" data-action="sample" data-value="' + esc(s) + '">' + esc(s) + '</button>').join("") + '</div>'
     + '</div>'
     + '<div data-show="mode:uncertainty">'
     + '<div class="row"><label class="field"><span>A</span><input type="text" data-bind="Atext"></label>'
@@ -1812,7 +1940,7 @@ function controlsHTML() {
     + dimInputs("ผลลัพธ์", "fR")
     + dimInputs("ส่วนที่ทราบ", "fK")
     + '</div></div>'
-    + '<label class="field"><input type="checkbox" data-bind="showSteps"> โชว์เหตุผลด้านขวา</label>'
+    + '<label class="field"><input type="checkbox" data-bind="showSteps"> โชว์เหตุผลในแผงกราฟ</label>'
     + '<div class="seg">'
     + '<button type="button" class="primary" data-action="random">สุ่มของใหม่</button>'
     + '<button type="button" data-action="step">ดูทีละขั้น</button>'
@@ -1907,7 +2035,7 @@ function card(title, body) {
 
 function stepsHTML() {
   if (state.mode === "instrument" && state.hideReading) return '<p class="muted">คำตอบถูกซ่อนอยู่ ลองอ่านเองก่อน แล้วค่อยปิดการซ่อนเพื่อดูวิธีคิด</p>';
-  if (!state.showSteps) return '<p class="muted">ติ๊ก “โชว์เหตุผลด้านขวา” หรือกดดูทีละขั้น</p>';
+  if (!state.showSteps) return '<p class="muted">ติ๊ก “โชว์เหตุผลในแผงกราฟ” หรือกดดูทีละขั้น</p>';
   const steps = getSteps();
   const n = Math.min(steps.length, state.reveal);
   return '<ol class="steps">' + steps.slice(0, n).map((s) => "<li>" + esc(s) + "</li>").join("") + "</ol>"
@@ -1926,7 +2054,8 @@ function misHTML() {
 }
 
 function analyticsShell() {
-  const target = (state.mode === "instrument" || state.mode === "uncertainty")
+  const hasGraph = state.mode === "instrument" || state.mode === "uncertainty";
+  const target = hasGraph
     ? '<section class="card"><h3>แม่นกับเที่ยง ต่างกันยังไง</h3><canvas id="target"></canvas>'
       + '<div class="seg">'
       + '<button type="button" data-action="scenario" data-press="targetScenario" data-value="both">กลางและชิด</button>'
@@ -1935,31 +2064,32 @@ function analyticsShell() {
       + '<button type="button" data-action="scenario" data-press="targetScenario" data-value="neither">ไม่กลางและกระจาย</button>'
       + '</div><p class="muted">จุดกลางคือของจริง จุดชิดกันคือวัดซ้ำแล้วได้ค่าใกล้กัน</p></section>'
     : "";
-  return '<div id="liveCards"></div>' + target
+  return '<div id="liveCards"></div>' + target + referenceHTML()
     + '<section class="card"><h3>ทำไมได้คำตอบนี้</h3><div id="liveSteps"></div></section>'
     + '<section class="mis" id="liveMis"></section>';
 }
 
-function dockHTML() {
-  if (state.mode === "instrument") {
-    return '<label class="field"><span>ลองพิมพ์คำตอบเอง</span><input id="answerBox" type="text" data-bind="studentAnswer" placeholder="เช่น 24.3 หรือ 2.43 cm"></label>'
-      + '<button type="button" class="primary" data-action="check">ตรวจดู</button> <span id="feedback"></span>';
-  }
+function referenceHTML() {
   if (state.mode === "units") {
     return '<div class="base-grid">' + BASES.map((b) => '<div class="chip"><b>' + b[0] + '</b>' + b[1] + ' (' + b[2] + ')</div>').join("") + '</div>'
       + '<p class="muted">หน่วย 7 ตัวนี้เป็นหน่วยตั้งต้น หน่วยอื่นสร้างจากพวกนี้</p>';
   }
-  if (state.mode === "sigfig") {
-    const samples = ["1500", "1500.", "1500.0", "0.01500", "1.50×10^3", "100.01", "0.0030", "1010"];
-    return '<div class="ex-grid">' + samples.map((s) => '<button type="button" data-action="sample" data-value="' + esc(s) + '">' + esc(s) + '</button>').join("") + '</div>';
-  }
   if (state.mode === "uncertainty") {
     return '<p class="muted">แถบสีฟ้าอมเขียวคือช่วงที่ไม่แน่ใจ จุดฟ้าคือแต่ละครั้งที่วัด เส้นชมพูคือของจริง</p>';
   }
-  const derived = [
-    ["ความเร็ว", "LT⁻¹"], ["ความเร่ง", "LT⁻²"], ["แรง", "MLT⁻²"], ["พลังงาน", "ML²T⁻²"], ["ความดัน", "ML⁻¹T⁻²"], ["ความหนาแน่น", "ML⁻³"]
-  ];
-  return '<div class="base-grid">' + derived.map((d) => '<div class="chip"><b>' + d[0] + '</b>[' + d[1] + ']</div>').join("") + '</div>';
+  if (state.mode === "dimension") {
+    const derived = [
+      ["ความเร็ว", "LT⁻¹"], ["ความเร่ง", "LT⁻²"], ["แรง", "MLT⁻²"], ["พลังงาน", "ML²T⁻²"], ["ความดัน", "ML⁻¹T⁻²"], ["ความหนาแน่น", "ML⁻³"]
+    ];
+    return '<div class="base-grid">' + derived.map((d) => '<div class="chip"><b>' + d[0] + '</b>[' + d[1] + ']</div>').join("") + '</div>';
+  }
+  return "";
+}
+
+function dockHTML() {
+  if (state.mode !== "instrument") return "";
+  return '<label class="field"><span>ลองพิมพ์คำตอบเอง</span><input id="answerBox" type="text" data-bind="studentAnswer" placeholder="เช่น 24.3 หรือ 2.43 cm"></label>'
+    + '<button type="button" class="primary" data-action="check">ตรวจดู</button> <span id="feedback"></span>';
 }
 
 function visible(spec) {
@@ -1996,13 +2126,45 @@ function syncControls() {
   document.querySelectorAll('[data-bind="zeroH"]').forEach((el) => { el.step = String(zStep); });
 }
 
+function answerChipHTML() {
+  if (state.mode === "instrument") {
+    const m = measure(state);
+    if (state.hideReading) return '<span class="chip-k">คำตอบ</span><span class="chip-v">ซ่อนอยู่</span>';
+    return '<span class="chip-k">คำตอบ</span><span class="chip-v">' + esc(m.record) + '</span>';
+  }
+  if (state.mode === "units") {
+    const c = getConversion();
+    if (!c.ok) return '<span class="chip-k">แปลงหน่วย</span><span class="chip-v">ดูในปรับค่า</span>';
+    return '<span class="chip-k">ได้</span><span class="chip-v">' + esc(c.text + " " + c.toLabel) + '</span>';
+  }
+  if (state.mode === "sigfig") {
+    const r = computeSig(state.sigA, state.sigB, state.sigOp);
+    return '<span class="chip-k">ผลลัพธ์</span><span class="chip-v">' + esc(r.ok ? r.text : "—") + '</span>';
+  }
+  if (state.mode === "uncertainty") {
+    const p = propagate(state.uncOp, state.Atext, state.dAtext, state.Btext, state.dBtext, state.powerN);
+    return '<span class="chip-k">ได้</span><span class="chip-v">' + esc(p.ok ? p.presented.text : "—") + '</span>';
+  }
+  const problem = currentProblem();
+  if (problem.finder) return '<span class="chip-k">หน่วยของ X</span><span class="chip-v">' + esc(siUnit(problem.lhs)) + '</span>';
+  return '<span class="chip-k">หน่วย</span><span class="chip-v">' + (problem.ok ? "ตรงกัน" : "ไม่ตรง") + '</span>';
+}
+
 function renderSide() {
   document.getElementById("stageBar").textContent = OBJECTIVES[state.mode];
+  const chip = document.getElementById("answerChip");
+  if (chip) chip.innerHTML = answerChipHTML();
+  const hasGraph = state.mode === "instrument" || state.mode === "uncertainty";
+  const graphBtn = document.getElementById("openGraph");
+  const graphTitle = document.getElementById("graphTitle");
+  if (graphBtn) graphBtn.textContent = hasGraph ? "กราฟ" : "เฉลย";
+  if (graphTitle) graphTitle.textContent = hasGraph ? "กราฟ" : "เฉลย";
   const dock = document.getElementById("dock");
   if (dock.dataset.mode !== state.mode) {
     dock.dataset.mode = state.mode;
     dock.innerHTML = dockHTML();
   }
+  dock.hidden = !dock.innerHTML;
   const fb = document.getElementById("feedback");
   if (fb) {
     fb.textContent = state.feedback;
@@ -2149,6 +2311,16 @@ function applyFinder(id) {
 }
 
 function onClick(e) {
+  const closer = e.target.closest("[data-close]");
+  if (closer) { setSheet(closer.dataset.close, false); return; }
+  const opener = e.target.closest("[data-sheet]");
+  if (opener) {
+    const name = opener.dataset.sheet;
+    const sheet = document.getElementById(name === "tune" ? "sheetTune" : "sheetGraph");
+    setSheet(name, !sheet.classList.contains("open"));
+    return;
+  }
+  if (e.target.id === "backdrop") { setSheet("none", false); return; }
   const b = e.target.closest("[data-action]");
   if (!b) return;
   const action = b.dataset.action;
@@ -2229,13 +2401,44 @@ function onUp() {
   refresh();
 }
 
+function setSheet(which, open) {
+  const tune = document.getElementById("sheetTune");
+  const graph = document.getElementById("sheetGraph");
+  const backdrop = document.getElementById("backdrop");
+  if (!tune || !graph) return;
+  if (which === "tune") {
+    tune.classList.toggle("open", open);
+    if (open) graph.classList.remove("open");
+  } else if (which === "graph") {
+    graph.classList.toggle("open", open);
+    if (open) tune.classList.remove("open");
+  } else {
+    tune.classList.remove("open");
+    graph.classList.remove("open");
+  }
+  tune.setAttribute("aria-hidden", tune.classList.contains("open") ? "false" : "true");
+  graph.setAttribute("aria-hidden", graph.classList.contains("open") ? "false" : "true");
+  const any = tune.classList.contains("open") || graph.classList.contains("open");
+  if (backdrop) backdrop.classList.toggle("open", any);
+  const tuneBtn = document.getElementById("openTune");
+  const graphBtn = document.getElementById("openGraph");
+  if (tuneBtn) {
+    tuneBtn.classList.toggle("on", tune.classList.contains("open"));
+    tuneBtn.setAttribute("aria-expanded", tune.classList.contains("open") ? "true" : "false");
+  }
+  if (graphBtn) {
+    graphBtn.classList.toggle("on", graph.classList.contains("open"));
+    graphBtn.setAttribute("aria-expanded", graph.classList.contains("open") ? "true" : "false");
+  }
+  if (graph.classList.contains("open")) requestAnimationFrame(() => drawTarget());
+}
+
 function resize() {
   const canvas = document.getElementById("view");
-  const parent = canvas.parentElement;
-  if (!parent || parent.clientWidth < 40) return;
+  const frame = canvas.parentElement;
   const dpr = Math.min(2, window.devicePixelRatio || 1);
-  const w = Math.max(300, parent.clientWidth - 28);
-  const h = Math.round(Math.max(430, Math.min(540, w * 0.62)));
+  const w = Math.max(300, frame.clientWidth - 24);
+  const h = Math.max(280, frame.clientHeight - 86);
   state.view = { w: w, h: h, dpr: dpr };
   canvas.style.width = w + "px";
   canvas.style.height = h + "px";
@@ -2274,6 +2477,9 @@ function init(fails) {
     refresh();
   });
   window.addEventListener("resize", () => { resize(); refresh(); });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setSheet("none", false);
+  });
   resize();
   refresh();
   if (fails && fails.length) document.getElementById("err").textContent = fails.join(" | ");
